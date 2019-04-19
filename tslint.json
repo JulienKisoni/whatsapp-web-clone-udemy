@@ -1,0 +1,14 @@
+{
+    "defaultSeverity": "error",
+    "jsRules": {},
+    "rules": {
+        "quotemark": [
+            true,
+            "single",
+            "jsx-double"
+        ],
+        "ordered-imports": false,
+        "no-var-requires": false
+    },
+    "rulesDirectory": []
+}

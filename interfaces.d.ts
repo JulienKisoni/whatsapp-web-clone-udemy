@@ -1,0 +1,3 @@
+interface InfoProps {
+  links: any;
+}
