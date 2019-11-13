@@ -6,6 +6,10 @@ const StyledAvatar = styled.div`
     border-radius: ${props => props.size === '4' ? '2rem' : '2.45rem'};
     position: relative;
     overflow: hidden;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .avatar--img {
         width: 100%;
