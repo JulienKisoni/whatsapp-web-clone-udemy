@@ -1,9 +1,11 @@
 import React from 'react';
 
+import Main from './Main';
+
 const App = (props:any): JSX.Element => {
   return (
     <div>
-      Composant App
+        <Main />
     </div>
   )
 };
