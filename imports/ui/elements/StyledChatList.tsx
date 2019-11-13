@@ -5,7 +5,7 @@ const StyledChatList = styled.div`
     flex-direction: column;
     background: white;
     width: 100%;
-    height: 69.5%;
+    height: 71.5%;
     overflow-y: auto;
     position: relative;
 
