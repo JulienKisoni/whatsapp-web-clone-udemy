@@ -9,7 +9,7 @@ const avatar_url:string = "https://randomuser.me/api/portraits/thumb/men/1.jpg";
 const LeftHeader = (props:any):JSX.Element => {
     return (
         <StyledLeftHeader>
-            <Avatar avatar_url={avatar_url} />
+            <Avatar size="4" avatar_url={avatar_url} />
             <div className="icons--left">
                 <FontAwesome 
                     name="circle-notch"

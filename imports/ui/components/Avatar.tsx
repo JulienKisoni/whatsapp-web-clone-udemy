@@ -4,7 +4,7 @@ import StyledAvatar from '../elements/StyledAvatar';
 
 const Avatar = (props:any):JSX.Element => {
     return (
-        <StyledAvatar size="4">
+        <StyledAvatar size={props.size}>
             <img 
                 alt="avatar" 
                 src={props.avatar_url} 
