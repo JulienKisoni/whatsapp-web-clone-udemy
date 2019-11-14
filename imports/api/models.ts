@@ -17,9 +17,10 @@ export interface Message {
     content?: string;
     createdAt?: Date;
     type?: MessageType;
+    ownership?: string;
 }
 
-export const messages:Chat[] = [
+export const chats:Chat[] = [
     {
         _id: '0',
         title: 'Ethan Gonzalez',
@@ -111,3 +112,132 @@ export const messages:Chat[] = [
         }
       }
     ];
+
+    export const messages:Message[] = [
+      {
+        _id: "01",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(2, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "02",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(2, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "03",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(2, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "04",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(2, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "05",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(1, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "06",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(1, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "07",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(1, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "08",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().subtract(1, 'days').toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "09",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "010",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "011",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "012",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "013",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "014",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "015",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "016",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "017",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+      {
+        _id: "018",
+        chatId: "0",
+        content: "Salut ça va ?",
+        createdAt: moment().toDate(),
+        type: MessageType.TEXT,
+      },
+    ]

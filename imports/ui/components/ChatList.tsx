@@ -3,16 +3,16 @@ import React from 'react';
 import StyledChatList from '../elements/StyledChatList';
 import ChatItem from './ChatItem';
 
-import { messages } from '../../api/models';
+import { chats } from '../../api/models';
 
 const ChatList = (props:any):JSX.Element => {
     const { onChatClick } = props;
     const renderChatItem = ():JSX.Element[] => {
-        return messages.map(message => {
+        return chats.map(chat => {
             return (
                 <ChatItem 
-                    key={message._id}
-                    {...message}
+                    key={chat._id}
+                    {...chat}
                     onChatClick={onChatClick}
                 />
             )

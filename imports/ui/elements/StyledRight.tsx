@@ -5,7 +5,6 @@ const StyledRight = styled.div`
     flex-direction: column;
     width: 65%;
     height: 100%
-    background: yellow;
 `
 
 export default StyledRight;

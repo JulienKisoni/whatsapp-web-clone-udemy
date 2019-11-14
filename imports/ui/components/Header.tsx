@@ -6,9 +6,10 @@ import StyledHeader from '../elements/StyledHeader';
 const Header = (props:any):JSX.Element => {
     const { icons, iconClass } = props;
     const renderIcons = ():JSX.Element[] => {
-        return icons.map(icon => {
+        return icons.map((icon:string, i:number) => {
             return (
                 <FontAwesome 
+                    key={i}
                     name={icon}
                     className={iconClass}
                 />

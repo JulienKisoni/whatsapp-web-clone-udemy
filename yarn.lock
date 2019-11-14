@@ -134,6 +134,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash@^4.14.147":
+  version "4.14.147"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.147.tgz#8ca5cfa9c67753dcb73e507d1bbf1c4f8ba6f029"
+  integrity sha512-+0zY1Axql6ru5T85Rh6aR6Zr0xT7c0USLqsHv01b3ID//dOrV3OvpXJGjm69+4QpxoZ0oMNEfmW1ltwXe2WVzQ==
+
 "@types/meteor@^1.4.27":
   version "1.4.36"
   resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.36.tgz#60b9bc9e28fe0e57eefe91c4a0fc9a4341619068"
