@@ -1,22 +1,28 @@
 import React from 'react';
+import Moment from 'react-moment';
 
 import StyledChatItem from '../elements/StyledChatItem';
 import Avatar from './Avatar';
 
-const avatar_url:string = "https://randomuser.me/api/portraits/thumb/men/1.jpg";
-
 const ChatItem = (props:any):JSX.Element => {
+    const { title, picture, lastMessage } = props;
+    const { content, createdAt } = lastMessage;
+    console.log('createdAt', createdAt);
     return (
         <StyledChatItem>
-            <Avatar size="4.9" avatar_url={avatar_url} />
+            <Avatar size="4.9" avatar_url={picture} />
             <div className="chat--contentContainer">
                 <div className="content--line1">
-                    <span className="content--line1__title">Julien Kisoni</span>
-                    <div className="content--line1__date">13:40</div>
+                    <span className="content--line1__title">{title}</span>
+                    <div className="content--line1__date">
+                        <Moment format="HH:mm">
+                            {createdAt}
+                        </Moment>
+                    </div>
                 </div>
                 <div className="content--line1">
                     <span className="content--message">
-                        Bonjour, j'aimerais savoir comment tu vas aujourd'hui
+                        {content}
                     </span>
                     <div className="chat--badge">3</div>
                 </div>
