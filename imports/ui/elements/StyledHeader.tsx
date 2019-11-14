@@ -20,6 +20,9 @@ const StyledHeader = styled.div`
         width: 14rem;
         height: 4rem;
     }
+    .small {
+        width: 4rem;
+    }
     .greyIcon {
         color: ${iconGrey}
         font-size: 2rem;
@@ -40,6 +43,10 @@ const StyledHeader = styled.div`
     .headerMsg--sbTitle {
         color: rgba(0,0,0,0.6);
         font-size: 1.3rem;
+    }
+    .iconFooter {
+        font-size: 3rem;
+        color: rgba(0,0,0,0.27);
     }
 `
 

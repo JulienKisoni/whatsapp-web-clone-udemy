@@ -14,7 +14,7 @@ const Left = (props:any):JSX.Element => {
     const { onChatClick } = props;
     return (
         <StyledLeft>
-            <Header icons={icons}>
+            <Header iconClass="greyIcon" icons={icons}>
                 <Avatar size="4" avatar_url={avatar_url} />
             </Header>
             <LeftStatus />
