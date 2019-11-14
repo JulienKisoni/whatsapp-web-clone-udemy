@@ -10,6 +10,7 @@ const StyledAvatar = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     .avatar--img {
         width: 100%;

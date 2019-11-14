@@ -5,7 +5,6 @@ const StyledMain = styled.div`
     flex-direction: row;
     width: 100vw;
     height: 100vh;
-    background: red;
 `
 
 export default StyledMain;

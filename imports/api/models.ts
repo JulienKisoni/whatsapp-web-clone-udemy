@@ -84,7 +84,7 @@ export const messages:Chat[] = [
         }
       },
       {
-        _id: '6',
+        _id: '7',
         title: 'Avery Stewart',
         picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg',
         lastMessage: {
@@ -93,7 +93,7 @@ export const messages:Chat[] = [
         }
       },
       {
-        _id: '7',
+        _id: '8',
         title: 'Katie Peterson',
         picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg',
         lastMessage: {
@@ -102,7 +102,7 @@ export const messages:Chat[] = [
         }
       },
       {
-        _id: '8',
+        _id: '9',
         title: 'Ray Edwards',
         picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg',
         lastMessage: {
