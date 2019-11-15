@@ -6,12 +6,13 @@ import MessageView from './MessageView';
 
 
 const Right = (props:any):JSX.Element => {
+    const { selectedChat } = props;
     return (
         <StyledRight>
             {!props.visible ? (
                 <RightImg />
             ): (
-                <MessageView />
+                <MessageView selectedChat={selectedChat} />
             )}
         </StyledRight>
     )

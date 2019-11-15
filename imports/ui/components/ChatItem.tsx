@@ -5,10 +5,10 @@ import StyledChatItem from '../elements/StyledChatItem';
 import Avatar from './Avatar';
 
 const ChatItem = (props:any):JSX.Element => {
-    const { title, picture, lastMessage, onChatClick } = props;
+    const { _id, title, picture, lastMessage, onChatClick } = props;
     const { content, createdAt } = lastMessage;
     return (
-        <StyledChatItem onClick={onChatClick}>
+        <StyledChatItem onClick={() => onChatClick(_id)}>
             <Avatar size="4.9" avatar_url={picture} />
             <div className="chat--contentContainer">
                 <div className="content--line1">

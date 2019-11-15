@@ -1,21 +1,29 @@
 import React from 'react';
+import _ from 'lodash';
 
 import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
 
+import { chats, Chat } from '../../api/models';
+
 const Main = (props:any): JSX.Element => {
     const [visible, setVisible] = React.useState<boolean>(false);
-    const [selectedChat, setSelectedChat] = React.useState<any>({});
-    const handleChatClick = ():void => {
+    const [chatArray, setChats] = React.useState<Chat[]>([...chats]);
+    const [selectedChat, setSelectedChat] = React.useState<any>(chatArray[0]);
+    console.log('selected chat before', selectedChat);
+    const handleChatClick = (_id:string):void => {
         if(!visible) {
             setVisible(true);
         }
+        const newChat:Chat = _.find(chatArray, { _id });
+        setSelectedChat(newChat);
+        console.log('selected chat after', selectedChat);
     }
     return (
         <StyledMain>
             <Left onChatClick={handleChatClick}/>
-            <Right visible={visible} />
+            <Right selectedChat={selectedChat} visible={visible} />
         </StyledMain>
     )
 }
