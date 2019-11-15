@@ -6,14 +6,16 @@ import ChatItem from './ChatItem';
 import { chats } from '../../api/models';
 
 const ChatList = (props:any):JSX.Element => {
-    const { onChatClick } = props;
+    const { onChatClick, selectedChat } = props;
     const renderChatItem = ():JSX.Element[] => {
         return chats.map(chat => {
+            const active:boolean = selectedChat._id === chat._id;
             return (
                 <ChatItem 
                     key={chat._id}
                     {...chat}
                     onChatClick={onChatClick}
+                    active={active}
                 />
             )
         });

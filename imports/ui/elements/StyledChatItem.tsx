@@ -11,6 +11,7 @@ const StyledChatItem = styled.div`
     height: 7.5rem;
     cursor: pointer;
     padding: 0 1.5rem;
+    background: ${props => props.active ? '#f4f5f5' : 'white'}
     &:hover {
         background: #f4f5f5;
     }

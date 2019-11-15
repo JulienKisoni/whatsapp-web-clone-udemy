@@ -11,7 +11,7 @@ const avatar_url:string = "https://randomuser.me/api/portraits/thumb/men/1.jpg";
 const icons:string[] = ["circle-notch", "comment-alt", "ellipsis-v"];
 
 const Left = (props:any):JSX.Element => {
-    const { onChatClick } = props;
+    const { onChatClick, chats, selectedChat } = props;
     return (
         <StyledLeft>
             <Header iconClass="greyIcon" icons={icons}>
@@ -19,7 +19,11 @@ const Left = (props:any):JSX.Element => {
             </Header>
             <LeftStatus />
             <Searchbar />
-            <ChatList onChatClick={onChatClick} />
+            <ChatList 
+                chats={chats} 
+                onChatClick={onChatClick} 
+                selectedChat={selectedChat}
+            />
         </StyledLeft>
     )
 };

@@ -22,8 +22,15 @@ const Main = (props:any): JSX.Element => {
     }
     return (
         <StyledMain>
-            <Left onChatClick={handleChatClick}/>
-            <Right selectedChat={selectedChat} visible={visible} />
+            <Left 
+                selectedChat={selectedChat} 
+                chats={chats}
+                onChatClick={handleChatClick}
+            />
+            <Right 
+                selectedChat={selectedChat} 
+                visible={visible} 
+            />
         </StyledMain>
     )
 }
