@@ -40,7 +40,7 @@ const MessageBox = (props:any):JSX.Element => {
     const { selectedChat } = props;
     const scrollToBottom = () => {
         messagesEnd.scrollIntoView({ behavior: "smooth" });
-        console.log('scroll to bottom called');
+        console.log('scroll to bottom function called');
     }
     React.useEffect(()=> {
         scrollToBottom();
