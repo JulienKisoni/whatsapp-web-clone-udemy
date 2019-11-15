@@ -3,10 +3,8 @@ import React from 'react';
 import StyledChatList from '../elements/StyledChatList';
 import ChatItem from './ChatItem';
 
-import { chats } from '../../api/models';
-
 const ChatList = (props:any):JSX.Element => {
-    const { onChatClick, selectedChat } = props;
+    const { onChatClick, selectedChat, chats } = props;
     const renderChatItem = ():JSX.Element[] => {
         return chats.map(chat => {
             const active:boolean = selectedChat._id === chat._id;

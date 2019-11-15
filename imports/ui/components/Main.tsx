@@ -20,6 +20,9 @@ const Main = (props:any): JSX.Element => {
         setSelectedChat(newChat);
         console.log('selected chat after', selectedChat);
     }
+    const handleSend = () => {
+        alert('message envoyé');
+    }
     return (
         <StyledMain>
             <Left 
@@ -30,6 +33,7 @@ const Main = (props:any): JSX.Element => {
             <Right 
                 selectedChat={selectedChat} 
                 visible={visible} 
+                onSend={handleSend}
             />
         </StyledMain>
     )
