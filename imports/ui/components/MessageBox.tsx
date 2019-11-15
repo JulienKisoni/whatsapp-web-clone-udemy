@@ -9,6 +9,8 @@ import { messages } from '../../api/models';
 let isEven:boolean = false;
 const format:string = 'D MMMM Y';
 
+let messagesEnd:HTMLDivElement;
+
 //messages est un tableau
 messages.forEach(message => {
     if(!!message.ownership === isEven) {
@@ -35,6 +37,15 @@ const newMessages:any[] = Object.keys(groupedMessages).map(timestamp => {
 console.log('new messages', newMessages);
 
 const MessageBox = (props:any):JSX.Element => {
+    const { selectedChat } = props;
+    const scrollToBottom = () => {
+        messagesEnd.scrollIntoView({ behavior: "smooth" });
+        console.log('scroll to bottom called');
+    }
+    React.useEffect(()=> {
+        scrollToBottom();
+        console.log('useEffect called');
+    }, [selectedChat])
     const renderMessages = (newMsg):JSX.Element[] => {
         return newMsg.groupedMessages.map(groupedMsg => {
             const msgClass = `message message--${groupedMsg.ownership}`;
@@ -77,6 +88,9 @@ const MessageBox = (props:any):JSX.Element => {
     return (
         <StyledMessageBox>
             {renderDays()}
+            <div style={{ float:"left", clear: "both" }}
+                ref={(el:HTMLDivElement) => { messagesEnd = el; }}>
+            </div>
         </StyledMessageBox>
     )
 }

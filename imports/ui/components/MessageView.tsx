@@ -21,7 +21,7 @@ const MessageView = (props:any):JSX.Element => {
                     <span className="headerMsg--sbTitle">en ligne</span>
                 </div>
             </Header>
-            <MessageBox />
+            <MessageBox selectedChat={props.selectedChat} />
             <Header iconsWidthSmall iconClass="iconFooter" icons={["microphone"]}>
                 <FontAwesome 
                     name="smile"
