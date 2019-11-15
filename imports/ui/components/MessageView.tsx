@@ -21,8 +21,11 @@ const MessageView = (props:any):JSX.Element => {
                     <span className="headerMsg--sbTitle">en ligne</span>
                 </div>
             </Header>
-            <MessageBox selectedChat={props.selectedChat} />
-            <Footer />
+            <MessageBox 
+                messages={props.messages} 
+                selectedChat={props.selectedChat} 
+            />
+            <Footer onSend={props.onSend} />
         </StyledMessageView>
     )
 }

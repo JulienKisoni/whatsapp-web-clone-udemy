@@ -5,39 +5,39 @@ import FontAwesome from 'react-fontawesome';
 
 import StyledMessageBox from '../elements/StyledMessageBox';
 
-import { messages } from '../../api/models';
+
 let isEven:boolean = false;
 const format:string = 'D MMMM Y';
 
 let messagesEnd:HTMLDivElement;
 
-//messages est un tableau
-messages.forEach(message => {
-    if(!!message.ownership === isEven) {
-        message.ownership = 'mine';
-    } else {
-        message.ownership = 'other';
-    }
-    isEven = !isEven;
-    return message;
-})
-console.log('messages normales', messages);
-//groupedMessages est un objet (un dictionnaire)
-const groupedMessages:any = _.groupBy(messages, message => {
-    return moment(message.createdAt).format(format);
-});
-console.log('groupedMessages', groupedMessages);
-const newMessages:any[] = Object.keys(groupedMessages).map(timestamp => {
-    return {
-        timestamp,
-        groupedMessages: groupedMessages[timestamp],
-        today: moment().format(format) === timestamp
-    }
-});
-console.log('new messages', newMessages);
-
 const MessageBox = (props:any):JSX.Element => {
-    const { selectedChat } = props;
+    const { selectedChat, messages } = props;
+
+    //messages est un tableau
+    messages.forEach(message => {
+        if(!!message.ownership === isEven) {
+            message.ownership = 'mine';
+        } else {
+            message.ownership = 'other';
+        }
+        isEven = !isEven;
+        return message;
+    })
+    console.log('messages normales', messages);
+    //groupedMessages est un objet (un dictionnaire)
+    const groupedMessages:any = _.groupBy(messages, message => {
+        return moment(message.createdAt).format(format);
+    });
+    console.log('groupedMessages', groupedMessages);
+    const newMessages:any[] = Object.keys(groupedMessages).map(timestamp => {
+        return {
+            timestamp,
+            groupedMessages: groupedMessages[timestamp],
+            today: moment().format(format) === timestamp
+        }
+    });
+    console.log('new messages', newMessages);
     const scrollToBottom = () => {
         messagesEnd.scrollIntoView({ behavior: "smooth" });
         console.log('scroll to bottom function called');
@@ -45,7 +45,7 @@ const MessageBox = (props:any):JSX.Element => {
     React.useEffect(()=> {
         scrollToBottom();
         console.log('useEffect called');
-    }, [selectedChat])
+    }, [selectedChat, messages]);
     const renderMessages = (newMsg):JSX.Element[] => {
         return newMsg.groupedMessages.map(groupedMsg => {
             const msgClass = `message message--${groupedMsg.ownership}`;

@@ -30,6 +30,7 @@ const Footer = (props:any):JSX.Element => {
             <FontAwesome 
                 name={iconName}
                 className="iconFooter"
+                onClick={()=>props.onSend(inputValue)}
             />
         </StyledFooter>
     )
