@@ -12,6 +12,11 @@ const Footer = (props:any):JSX.Element => {
         const name = e.target.value !== "" ? "paper-plane" : "microphone";
         setIconName(name);
     }
+    const handleClick = ()=> {
+        props.onSend(inputValue);
+        setInputValue("");
+        setIconName("microphone");
+    }
     return (
         <StyledFooter>
             <FontAwesome 
@@ -30,7 +35,7 @@ const Footer = (props:any):JSX.Element => {
             <FontAwesome 
                 name={iconName}
                 className="iconFooter"
-                onClick={()=>props.onSend(inputValue)}
+                onClick={handleClick}
             />
         </StyledFooter>
     )

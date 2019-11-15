@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
+import FlipMove from 'react-flip-move';
 
 import StyledMessageBox from '../elements/StyledMessageBox';
 
@@ -87,7 +88,9 @@ const MessageBox = (props:any):JSX.Element => {
     }
     return (
         <StyledMessageBox>
-            {renderDays()}
+            <FlipMove>
+                {renderDays()}
+            </FlipMove>
             <div style={{ float:"left", clear: "both" }}
                 ref={(el:HTMLDivElement) => { messagesEnd = el; }}>
             </div>

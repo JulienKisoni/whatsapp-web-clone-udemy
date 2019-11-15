@@ -67,6 +67,7 @@ const StyledMessageBox = styled.div`
         border-radius: 0.7rem;
         margin-bottom: 0.2rem;
         width: auto;
+        max-width: 65%;
         position: relative;
     }
     .detailsContainer {
