@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const bgGreen = "#09D261";
-
-const StyledChatItem = styled.div`
+const StyledChatItem = styled.div `
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
@@ -11,9 +9,12 @@ const StyledChatItem = styled.div`
     height: 7.5rem;
     cursor: pointer;
     padding: 0 1.5rem;
-    background: ${props => props.active ? '#f4f5f5' : 'white'}
+    background: ${ ({
+    active,
+    theme}) => active ? theme.chatItem.color.backgroundActive : theme.chatItem.color.backgroundNormal};
     &:hover {
-        background: #f4f5f5;
+        background: ${ ({
+        theme}) => theme.chatItem.color.backgroundActive};
     }
 
     .chat--contentContainer {
@@ -21,7 +22,8 @@ const StyledChatItem = styled.div`
         flex-direction: column;
         justify-content: center;
         margin-left: 1.5rem;
-        border-bottom: 0.1rem solid #f2f2f2;
+        border-bottom: ${ ({
+            theme}) => '0.1rem solid '+theme.chatItem.color.borderBottom};
         width: 85%;
         height: 100%;
     }
@@ -39,19 +41,21 @@ const StyledChatItem = styled.div`
     }
     .content--line1__date {
         font-size: 1.2rem;
-        color: rgba(0,0,0,0.4);
+        color: ${ ({
+                theme}) => theme.chatItem.color.date};
         text-align: right;
         margin-top: 0.3rem;
         margin-left: 0.6rem;
     }
     .content--message {
         font-size: 1.4rem;
-        color: rgba(0,0,0,0.6);
+        color: ${ ({
+                    theme}) => theme.chatItem.color.message};
         overflow: hidden;
         white-space: nowrap;
     }
     .chat--badge {
-        background: ${bgGreen}
+        background: ${ ({theme}) => theme.chatItem.color.bgGreen};
         display: flex;
         justify-content: center;
         align-items: center;
@@ -62,6 +66,6 @@ const StyledChatItem = styled.div`
         text-align: right;
         margin-left: 2rem;
     }
-`
+` 
 
 export default StyledChatItem;

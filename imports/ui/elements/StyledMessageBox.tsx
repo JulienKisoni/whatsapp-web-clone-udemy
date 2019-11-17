@@ -36,7 +36,7 @@ const StyledMessageBox = styled.div`
         margin-bottom: 1.2rem;
     }
     .day--wrapper {
-        background: rgba(225,245,254,.92);
+        background: ${({theme}) => theme.messageBox.color.dayWrapper};
         border-radius: 0.7rem;
         padding: 0.6rem 1.2rem;
         text-align: center;
@@ -47,7 +47,7 @@ const StyledMessageBox = styled.div`
         align-items: center;
     }
     .day--span {
-        color: #60747D;
+        color: ${({theme}) => theme.messageBox.color.dayspan};
         font-size: 1.25rem;
         text-transform: uppercase;
     }
@@ -62,8 +62,8 @@ const StyledMessageBox = styled.div`
         flex-direction: row;
         align-items:center;
         font-size: 1.4rem;
-        color: #262626;
-        background: #fff;
+        color: ${({theme}) => theme.messageBox.color.message};
+        background: ${({theme}) => theme.messageBox.color.messageBackground};
         border-radius: 0.7rem;
         margin-bottom: 0.2rem;
         width: auto;
@@ -81,10 +81,10 @@ const StyledMessageBox = styled.div`
         right: -0.7rem;
         width: 5.5rem;
         margin-left: 5rem;
-        color: rgba(0,0,0,0.45);
+        color: ${({theme}) => theme.messageBox.color.detailsContainer}
     }
     .message--mine {
-        background: #DCF8C6;
+        background: ${({theme}) => theme.messageBox.color.messageMineBackground};
         margin-left: auto;
         align-items: flex-end;
     }

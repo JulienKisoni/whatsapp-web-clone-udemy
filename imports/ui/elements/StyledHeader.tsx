@@ -9,7 +9,7 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     width: calc(100% - 3.2rem);
     height: 6%;
-    background: #eee;
+    background: ${ ({theme}) => theme.header.color.background};
     padding: 1rem 1.6rem;
 
     .icons--left{
@@ -24,7 +24,7 @@ const StyledHeader = styled.div`
         width: 4rem;
     }
     .greyIcon {
-        color: ${iconGrey}
+        color: ${ ({theme}) => theme.header.color.iconGrey};
         font-size: 2rem;
         cursor: pointer;
     }
@@ -37,16 +37,12 @@ const StyledHeader = styled.div`
         justify-content: space-around;
     }
     .headerMsg--title {
-        color: #000000;
+        color: ${ ({theme}) => theme.header.color.title};
         font-size: 1.6rem;
     }
     .headerMsg--sbTitle {
-        color: rgba(0,0,0,0.6);
+        color: ${ ({theme}) => theme.header.color.subTitle};
         font-size: 1.3rem;
-    }
-    .iconFooter {
-        font-size: 3rem;
-        color: rgba(0,0,0,0.27);
     }
 `
 

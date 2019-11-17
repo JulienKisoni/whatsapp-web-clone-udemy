@@ -5,13 +5,13 @@ const StyledSearchbar = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: #F8F8F8;
+    background: ${({theme}) => theme.searchBar.color.background};
     width: 100%;
     height: 7%;
     position: relative;
 
     .searchbar--label {
-        background: white;
+        background: ${({theme}) => theme.searchBar.color.labelBackground};
         position: absolute;
         top: 0.7rem;
         left: 1.2rem;
@@ -26,7 +26,7 @@ const StyledSearchbar = styled.div`
         justify-content: space-between;
     }
     .searchbar--icon {
-        color: rgba(0,0,0,0.3);
+        color: ${({theme}) => theme.searchBar.color.icon};
         font-size: 1.3rem;
         margin-right: 1.5rem;
     }
@@ -40,9 +40,9 @@ const StyledSearchbar = styled.div`
         user-select: text;
         z-index: 1;
         border: none;
-        color: #2A2A2A;
+        color: ${({theme}) => theme.searchBar.color.input};
         &::placeholder {
-            color: rgba(0,0,0,0.3);
+            color: ${({theme}) => theme.searchBar.color.placeholder};
             opacity: 1;
             font-size: 1.4rem;
         }

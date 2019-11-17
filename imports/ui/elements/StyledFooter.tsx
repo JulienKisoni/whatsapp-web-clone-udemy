@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const iconGrey = "#929fa6";
-
 const StyledFooter = styled.div`
     display: flex;
     flex-direction: row;
@@ -9,11 +7,11 @@ const StyledFooter = styled.div`
     justify-content: space-between;
     width: calc(100% - 3.2rem);
     height: 6%;
-    background: #eee;
+    background: ${({theme}) => theme.footer.color.background};
     padding: 1rem 1.6rem;
 
     .message--label {
-        background: white;
+        background: ${({theme}) => theme.footer.color.labelBackground};
         border-radius: 1.8rem;
         padding-left: 2.5rem;
         padding-right: 2.2rem;
@@ -34,16 +32,16 @@ const StyledFooter = styled.div`
         user-select: text;
         z-index: 1;
         border: none;
-        color: #2A2A2A;
+        color: ${({theme}) => theme.footer.color.input};
         &::placeholder {
-            color: rgba(0,0,0,0.3);
+            color: ${({theme}) => theme.footer.color.placeholder};
             opacity: 1;
             font-size: 1.4rem;
         }
     }
     .iconFooter {
         font-size: 3rem;
-        color: rgba(0,0,0,0.27);
+        color: ${({theme}) => theme.footer.color.iconFooter};
         cursor: pointer;
     }
 `
