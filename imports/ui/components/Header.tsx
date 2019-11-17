@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import StyledHeader from '../elements/StyledHeader';
 
 const Header = (props:any):JSX.Element => {
-    const { icons, iconClass, onSend } = props;
+    const { icons, iconClass } = props;
     const renderIcons = ():JSX.Element[] => {
         return icons.map((icon:string, i:number) => {
             return (

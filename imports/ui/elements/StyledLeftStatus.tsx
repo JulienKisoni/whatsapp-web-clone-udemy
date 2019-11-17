@@ -1,16 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledLeftStatus = styled.div `
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: ${ ({color, theme}) => color === "blue"
-    ? theme.leftStatus.color.bgBlue
-    : theme.leftStatus.color.bgOrange};
+    background: ${ ({theme}) => theme.leftStatus.color.bgOrange};
     width: calc(100% - 2.6rem);
     height: calc(16% - 2.4rem);
     padding: 1.2rem 1.3rem;
     cursor: pointer;
+
+    ${({color})=> color === "blue" && css`
+        background: ${({theme}) => theme.leftStatus.color.bgBlue};
+    `}
 
     .status--textContainer {
         padding-left: 1.3rem;

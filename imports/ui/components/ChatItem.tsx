@@ -9,7 +9,7 @@ const ChatItem = (props:any):JSX.Element => {
     const { content, createdAt } = lastMessage;
     return (
         <StyledChatItem active={active} onClick={() => onChatClick(_id)}>
-            <Avatar size="4.9" avatar_url={picture} />
+            <Avatar large avatar_url={picture} />
             <div className="chat--contentContainer">
                 <div className="content--line1">
                     <span className="content--line1__title">{title}</span>

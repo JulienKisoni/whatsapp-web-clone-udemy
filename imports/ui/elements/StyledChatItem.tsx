@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledChatItem = styled.div `
     display: flex;
@@ -9,13 +9,13 @@ const StyledChatItem = styled.div `
     height: 7.5rem;
     cursor: pointer;
     padding: 0 1.5rem;
-    background: ${ ({
-    active,
-    theme}) => active ? theme.chatItem.color.backgroundActive : theme.chatItem.color.backgroundNormal};
+    background: ${({theme}) => theme.chatItem.color.backgroundNormal};
     &:hover {
-        background: ${ ({
-        theme}) => theme.chatItem.color.backgroundActive};
+        background: ${({theme}) => theme.chatItem.color.backgroundActive};
     }
+    ${({active}) => active && css`
+        background: ${({theme}) => theme.chatItem.color.backgroundActive};
+    `}
 
     .chat--contentContainer {
         display: flex;

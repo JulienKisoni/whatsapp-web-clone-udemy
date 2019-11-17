@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const iconGrey = "#929fa6";
-
 const StyledHeader = styled.div`
     display: flex;
     flex-direction: row;

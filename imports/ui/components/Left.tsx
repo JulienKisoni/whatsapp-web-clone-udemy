@@ -15,7 +15,7 @@ const Left = (props:any):JSX.Element => {
     return (
         <StyledLeft>
             <Header iconClass="greyIcon" icons={icons}>
-                <Avatar size="4" avatar_url={avatar_url} />
+                <Avatar avatar_url={avatar_url} />
             </Header>
             <LeftStatus />
             <Searchbar />
