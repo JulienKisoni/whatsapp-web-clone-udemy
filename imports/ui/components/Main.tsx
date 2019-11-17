@@ -17,7 +17,7 @@ const Main = (props : any) : JSX.Element => {
     const [chatArray,
         setChats] = React.useState < Chat[] > ([...chats]);
     const [selectedChat,
-        setSelectedChat] = React.useState < Chat > (chatArray[0]);
+        setSelectedChat] = React.useState < Chat > ({});
     const [messageArray,
         setMessages] = React.useState < Message[] > ([...messages]);
     console.log('selected chat before', selectedChat);
