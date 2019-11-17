@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js add react-fontawesome
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js add --dev @types/react-meteor-hooks
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,8 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:60:26)
+  Error: https://registry.yarnpkg.com/@types%2freact-meteor-hooks: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:66926:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:140564:22)
+      at Request.emit (events.js:210:5)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:141536:10)
+      at Request.emit (events.js:210:5)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:141458:12)
+      at Object.onceWrapper (events.js:299:28)
+      at IncomingMessage.emit (events.js:215:7)
+      at endReadableNT (_stream_readable.js:1183:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -29,14 +38,20 @@ npm manifest:
     },
     "dependencies": {
       "@babel/runtime": "^7.3.4",
+      "@types/lodash": "^4.14.147",
       "lodash": "^4.17.15",
       "meteor-node-stubs": "^0.4.1",
       "moment": "^2.24.0",
       "prop-types": "^15.7.2",
-      "react": "^16.5.0",
-      "react-dom": "^16.5.0",
+      "react": "^16.11.0",
+      "react-dom": "^16.11.0",
+      "react-flip-move": "^3.0.4",
+      "react-fontawesome": "^1.7.1",
+      "react-meteor-hooks": "^0.3.1",
+      "react-moment": "^0.9.6",
       "react-router-dom": "^5.1.2",
-      "styled-components": "^4.4.1"
+      "styled-components": "^4.4.1",
+      "uuid": "^3.3.3"
     },
     "meteor": {
       "mainModule": {
@@ -52,7 +67,7 @@ npm manifest:
       "@types/react-dom": "^16.8.4",
       "tslint": "^5.16.0",
       "tslint-react": "^4.0.0",
-      "typescript": "^3.4.4"
+      "typescript": "3.6.4"
     }
   }
 
@@ -195,6 +210,11 @@ Lockfile:
     integrity sha512-4r8qa0quOvh7lGD0pre62CAb1oni1OO6ecJLGCezTmhQ8Fz50Arx9RUszryR8KlgK6avuSXvviL6yWyViQABOg==
     dependencies:
       "@types/node" "*"
+  
+  "@types/lodash@^4.14.147":
+    version "4.14.147"
+    resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.147.tgz#8ca5cfa9c67753dcb73e507d1bbf1c4f8ba6f029"
+    integrity sha512-+0zY1Axql6ru5T85Rh6aR6Zr0xT7c0USLqsHv01b3ID//dOrV3OvpXJGjm69+4QpxoZ0oMNEfmW1ltwXe2WVzQ==
   
   "@types/meteor@^1.4.27":
     version "1.4.36"
@@ -945,7 +965,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
     integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
   
-  prop-types@^15.5.4, prop-types@^15.6.2, prop-types@^15.7.2:
+  prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -1001,7 +1021,7 @@ Lockfile:
       randombytes "^2.0.5"
       safe-buffer "^5.1.0"
   
-  react-dom@^16.5.0:
+  react-dom@^16.11.0:
     version "16.11.0"
     resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.11.0.tgz#7e7c4a5a85a569d565c2462f5d345da2dd849af5"
     integrity sha512-nrRyIUE1e7j8PaXSPtyRKtz+2y9ubW/ghNgqKFHHAHaeP0fpF5uXR+sq8IMRHC+ZUxw7W9NyCDTBtwWxvkb0iA==
@@ -1011,10 +1031,32 @@ Lockfile:
       prop-types "^15.6.2"
       scheduler "^0.17.0"
   
+  react-flip-move@^3.0.4:
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.4.tgz#261f66101fbc305f9b7b28959c5cf8236413ca74"
+    integrity sha512-HyUVv9g3t/BS7Yz9HgrtYSWyRNdR2F81nkj+C5iRY675AwlqCLB5JU9mnZWg0cdVz7IM4iquoyZx70vzZv3Z8Q==
+  
+  react-fontawesome@^1.7.1:
+    version "1.7.1"
+    resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.7.1.tgz#f74f5a338fef3ee3b379820109c1cba47290f035"
+    integrity sha512-kottReWW1I9Uupub6A5YX4VK7qfpFnEjAcm5zB4Aepst7iofONT27GJYdTcRsj7q5uQu9PXBL7GsxAFKANNUVg==
+    dependencies:
+      prop-types "^15.5.6"
+  
   react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
     version "16.11.0"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
     integrity sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
+  
+  react-meteor-hooks@^0.3.1:
+    version "0.3.1"
+    resolved "https://registry.yarnpkg.com/react-meteor-hooks/-/react-meteor-hooks-0.3.1.tgz#21557e6af181a301ccdd8f06eb3d15e3dc4fb08b"
+    integrity sha512-HRpoG3ulHpL2YexQH2uzpvLUFBAZ2MCTfxDHdQF+Fa03E7EgZyPy8khnmOIQU0wKI+DgXyueGUAC9nV5zK5nuA==
+  
+  react-moment@^0.9.6:
+    version "0.9.6"
+    resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.9.6.tgz#6b359a48205a52196408303e30bc982cd46d0bee"
+    integrity sha512-GAnd5NRIpGjDqLoGahJCkiCEQS1d8+dIZbIfPuy/eQ0O5Rio43fEkj5G+qrKbZCQY55fiNafpHpuirVIHqPoSg==
   
   react-router-dom@^5.1.2:
     version "5.1.2"
@@ -1045,7 +1087,7 @@ Lockfile:
       tiny-invariant "^1.0.2"
       tiny-warning "^1.0.0"
   
-  react@^16.5.0:
+  react@^16.11.0:
     version "16.11.0"
     resolved "https://registry.yarnpkg.com/react/-/react-16.11.0.tgz#d294545fe62299ccee83363599bf904e4a07fdbb"
     integrity sha512-M5Y8yITaLmU0ynd0r1Yvfq98Rmll6q8AxaEe88c8e7LxO8fZ2cNgmFt0aGAS9wzf1Ao32NKXtCl+/tVVtkxq6g==
@@ -1279,10 +1321,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
     integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
   
-  typescript@^3.4.4:
-    version "3.7.2"
-    resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
-    integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
+  typescript@3.6.4:
+    version "3.6.4"
+    resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
+    integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
   
   url@^0.11.0:
     version "0.11.0"
@@ -1310,6 +1352,11 @@ Lockfile:
     integrity sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==
     dependencies:
       inherits "2.0.3"
+  
+  uuid@^3.3.3:
+    version "3.3.3"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
+    integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
   
   value-equal@^1.0.1:
     version "1.0.1"

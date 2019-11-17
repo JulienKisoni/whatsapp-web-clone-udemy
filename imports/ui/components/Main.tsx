@@ -1,12 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
-import {ThemeProvider} from 'styled-components';
 
 import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
-import NormalTheme from '../../theme/NormalTheme';
 
 import {chats, Chat, messages, Message, MessageType} from '../../api/models';
 import moment from 'moment';
@@ -43,19 +41,18 @@ const Main = (props : any) : JSX.Element => {
         })
     }
     return (
-        <ThemeProvider theme={NormalTheme}>
             <StyledMain>
                 <Left
                     selectedChat={selectedChat}
                     chats={chatArray}
                     onChatClick={handleChatClick}/>
                 <Right
+                    right
                     selectedChat={selectedChat}
                     visible={visible}
                     onSend={handleSend}
                     messages={messageArray}/>
             </StyledMain>
-        </ThemeProvider>
     )
 }
 

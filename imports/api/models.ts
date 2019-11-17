@@ -18,6 +18,19 @@ export interface Message {
     createdAt?: Date;
     type?: MessageType;
     ownership?: string;
+    senderId?: string;
+}
+
+export interface Profile {
+  phone?: string;
+  picture?: string;
+}
+
+export interface User {
+  _id?: string;
+  username?: string;
+  password?: string;
+  profile?: Profile;
 }
 
 export const chats:Chat[] = [

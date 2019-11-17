@@ -971,6 +971,11 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
   integrity sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
 
+react-meteor-hooks@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-meteor-hooks/-/react-meteor-hooks-0.3.1.tgz#21557e6af181a301ccdd8f06eb3d15e3dc4fb08b"
+  integrity sha512-HRpoG3ulHpL2YexQH2uzpvLUFBAZ2MCTfxDHdQF+Fa03E7EgZyPy8khnmOIQU0wKI+DgXyueGUAC9nV5zK5nuA==
+
 react-moment@^0.9.6:
   version "0.9.6"
   resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.9.6.tgz#6b359a48205a52196408303e30bc982cd46d0bee"

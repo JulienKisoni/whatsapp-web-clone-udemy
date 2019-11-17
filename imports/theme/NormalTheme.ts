@@ -65,6 +65,8 @@ const NormalTheme : any = {
             mediumGrey: "#929fa6",
             lightGrey: "#e1e9eb",
             bgGrey: "#f7f9fa",
+            bgGreen: "#09D261",
+            darkGreen: "#1C8B82",
         }
     },
     left: {
