@@ -7,7 +7,7 @@ import MessageView from './MessageView';
 const messageText:string = "Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l'utilisation des données, connectez votre téléphone à un réseau WI-FI."
 
 const Right = (props:any):JSX.Element => {
-    const { selectedChat, onSend, messages, right } = props;
+    const { selectedChat, onSend, right } = props;
     return (
         <StyledRight>
             {!props.visible ? (
@@ -16,7 +16,6 @@ const Right = (props:any):JSX.Element => {
                 <MessageView 
                     onSend={onSend} 
                     selectedChat={selectedChat} 
-                    messages={messages}
                 />
             )}
         </StyledRight>

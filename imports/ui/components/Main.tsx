@@ -7,7 +7,7 @@ import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
 
-import {chats, Chat, messages, Message, MessageType} from '../../api/models';
+import { Chat, messages, Message, MessageType} from '../../api/models';
 import moment from 'moment';
 
 import { findChats } from '../../api/helpers';
@@ -16,6 +16,7 @@ const Main = (props : any) : JSX.Element => {
     let chatsReady:boolean;
         Tracker.autorun(() => {
             chatsReady = Meteor.subscribe('Chats.Mine').ready();
+            Meteor.subscribe('messages.all');
             console.log('theChats', findChats());
             console.log('chatsReady', chatsReady);
         });
@@ -24,8 +25,8 @@ const Main = (props : any) : JSX.Element => {
         setVisible] = React.useState<boolean>(false);
     const [selectedChat,
         setSelectedChat] = React.useState<Chat>({});
-    const [messageArray,
-        setMessages] = React.useState<Message[]>([...messages]);
+   /*  const [messageArray,
+        setMessages] = React.useState<Message[]>([...messages]); */
     console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
         if (!visible) {
@@ -59,8 +60,7 @@ const Main = (props : any) : JSX.Element => {
                     right
                     selectedChat={selectedChat}
                     visible={visible}
-                    onSend={handleSend}
-                    messages={messageArray}/>
+                    onSend={handleSend}/>
             </StyledMain>
     )
 }
