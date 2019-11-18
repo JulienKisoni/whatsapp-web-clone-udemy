@@ -5,7 +5,7 @@ import ChatItem from './ChatItem';
 import Spinner from './Spinner';
 
 const ChatList = (props:any):JSX.Element => {
-    const { onChatClick, selectedChat, chats } = props;
+    const { onChatClick, selectedChat, chats, chatsLoading } = props;
     const renderChatItem = ():JSX.Element[] => {
         return chats.map(chat => {
             const active:boolean = selectedChat._id === chat._id;
@@ -21,6 +21,9 @@ const ChatList = (props:any):JSX.Element => {
     }
     return (
         <StyledChatList>
+            {chatsLoading ? (
+                <Spinner />
+            ) : null}
             {renderChatItem()}
         </StyledChatList>
     )

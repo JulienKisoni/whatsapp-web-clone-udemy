@@ -19,7 +19,7 @@ const StyledSpinner = styled.div`
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
-        border: ${({theme}) => '0.5rem solid'+theme.spinner.color.green};
+        border: 0.5rem solid #09D261;
         border-top-color: transparent;
         animation: ${animateSpinner} 1s linear infinite;
     }

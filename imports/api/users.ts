@@ -48,6 +48,14 @@ export const users : User[] = [
     }
 ]
 
+if(Meteor.isServer) {
+    Meteor.publish('users.all', function() {
+        return Meteor.users.find({}, {
+            fields: { services: 0 }
+        });
+    })
+}
+
 Meteor.methods({
     'users.login': function({ username, phone, password }) {
         check(username, String);
@@ -68,6 +76,14 @@ Meteor.methods({
                     picture: "https://t3.ftcdn.net/jpg/01/09/00/64/240_F_109006426_388PagqielgjFTAMgW59jRaDmPJvSBUL.jpg",
                 }
             });
+        }
+    },
+    'users.details': function(_id:string) {
+        const otherUser:User = Meteor.users.findOne(_id);
+        return {
+            username: otherUser.username,
+            picture: otherUser.profile.picture,
+            phone: otherUser.profile.phone
         }
     }
 })

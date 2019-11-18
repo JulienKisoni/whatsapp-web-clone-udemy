@@ -1,15 +1,24 @@
 import React from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
-
+import { Tracker } from 'meteor/tracker';
+import { Meteor } from 'meteor/meteor';
 import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
 
 import {chats, Chat, messages, Message, MessageType} from '../../api/models';
 import moment from 'moment';
+import { ChatsCollection } from '../../api/chats';
+import { findChats } from '../../api/helpers';
 
 const Main = (props : any) : JSX.Element => {
+    let chatsLoading:boolean;
+    let userReady:boolean;
+    Tracker.autorun(()=> {
+         chatsLoading = Meteor.subscribe('Chats.Mine').ready();
+        console.log('chats', findChats());
+    })
     const [visible,
         setVisible] = React.useState < boolean > (false);
     const [chatArray,
@@ -43,6 +52,7 @@ const Main = (props : any) : JSX.Element => {
     return (
             <StyledMain>
                 <Left
+                    chatsLoading={chatsLoading}
                     selectedChat={selectedChat}
                     chats={chatArray}
                     onChatClick={handleChatClick}/>
