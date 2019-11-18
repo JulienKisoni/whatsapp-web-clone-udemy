@@ -78,6 +78,11 @@ const NormalTheme : any = {
         color: {
             background: "white"
         }
+    },
+    spinner: {
+        color: {
+            green: "#09D261"
+        }
     }
 }
 

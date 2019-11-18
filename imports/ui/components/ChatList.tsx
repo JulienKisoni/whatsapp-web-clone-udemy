@@ -2,6 +2,7 @@ import React from 'react';
 
 import StyledChatList from '../elements/StyledChatList';
 import ChatItem from './ChatItem';
+import Spinner from './Spinner';
 
 const ChatList = (props:any):JSX.Element => {
     const { onChatClick, selectedChat, chats } = props;
