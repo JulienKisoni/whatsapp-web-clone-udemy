@@ -8,6 +8,7 @@ export interface Chat {
     _id?: string;
     title?: string;
     picture?: string;
+    participants?: string[];
     lastMessage?: Message;
 }
 
@@ -30,6 +31,7 @@ export interface User {
   _id?: string;
   username?: string;
   password?: string;
+  services?: any;
   profile?: Profile;
 }
 

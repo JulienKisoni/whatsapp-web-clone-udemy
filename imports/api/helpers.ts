@@ -1,6 +1,7 @@
 import { Accounts } from 'meteor/accounts-base';
 
-import { User } from './models';
+import { ChatsCollection } from './chats';
+import { User, Chat } from './models';
 
 export const createDummyUsers = (users: User[]):void => {
     users.forEach((user: User) => {
@@ -9,5 +10,12 @@ export const createDummyUsers = (users: User[]):void => {
             password: user.password,
             profile: user.profile
         });
+    });
+};
+
+export const createDummyChats = (chats: Chat[]):void => {
+    console.log('createDummyChats called');
+    chats.forEach((chat)=> {
+        ChatsCollection.insert(chat);
     });
 };
