@@ -3,11 +3,11 @@ import _ from 'lodash';
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import FlipMove from 'react-flip-move';
+import { Meteor } from 'meteor/meteor';
 
 import StyledMessageBox from '../elements/StyledMessageBox';
+import { Message } from '../../api/models';
 
-
-let isEven:boolean = false;
 const format:string = 'D MMMM Y';
 
 let messagesEnd:HTMLDivElement;
@@ -16,13 +16,8 @@ const MessageBox = (props:any):JSX.Element => {
     const { selectedChat, messages } = props;
 
     //messages est un tableau
-    messages.forEach(message => {
-        if(!!message.ownership === isEven) {
-            message.ownership = 'mine';
-        } else {
-            message.ownership = 'other';
-        }
-        isEven = !isEven;
+    messages.forEach((message:Message) => {
+        message.ownership = message.senderId === Meteor.userId() ? 'mine' : 'other';
         return message;
     })
     console.log('messages normales', messages);
