@@ -29,6 +29,7 @@ export interface Profile {
 
 export interface User {
   _id?: string;
+  createdAt?: Date;
   username?: string;
   password?: string;
   services?: any;

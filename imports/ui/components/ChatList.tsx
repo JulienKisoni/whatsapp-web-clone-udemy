@@ -21,9 +21,6 @@ const ChatList = (props:any):JSX.Element => {
     }
     return (
         <StyledChatList>
-            {chatsLoading ? (
-                <Spinner />
-            ) : null}
             {renderChatItem()}
         </StyledChatList>
     )

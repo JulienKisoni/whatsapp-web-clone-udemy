@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 
 import StyledLeft from '../elements/StyledLeft';
 import Header from './Header';
@@ -15,7 +16,7 @@ const Left = (props:any):JSX.Element => {
     return (
         <StyledLeft>
             <Header iconClass="greyIcon" icons={icons}>
-                <Avatar avatar_url={avatar_url} />
+                <Avatar avatar_url={Meteor.user().profile.picture} />
             </Header>
             <LeftStatus />
             <Searchbar />

@@ -1,5 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 
 import { ChatsCollection } from './chats';
 import { User, Chat } from './models';
@@ -21,22 +22,18 @@ export const createDummyChats = (chats: Chat[]):void => {
     });
 };
 
-export const findChats = () => {
-    return ChatsCollection.find()
-    .map( async (ChatCollection) => {
-        //console.log('participants', ChatCollection.participants);//
-        const _id:string = findOtherId(ChatCollection.participants);
-        //console.log('id', _id);//
-        /* const { username, phone, picture} = await findOtherUser(_id);
-        return {
-            ...ChatCollection,
-            username,
-            profile: {
-                picture,
-                phone
+export const findChats = ():Chat[] => {
+    return ChatsCollection.find().fetch()
+        .map(chatCollection => {
+            const otherId:string = findOtherId(chatCollection.participants);
+            const { username, profile } = findOtherUser(otherId);
+            return {
+                ...chatCollection,
+                title: username,
+                picture: profile.picture,
+                phone: profile.phone
             }
-        } */
-    })
+        });
 };
 
 const findOtherId = (participants:string[]):string => {
@@ -50,14 +47,6 @@ const findOtherId = (participants:string[]):string => {
     return otherId;
 }
 
-const findOtherUser = (_id:string) => {
-     return new Promise((resolve, reject) => {
-        Meteor.call('users.details', _id, (err, res)=> {
-            if(err) {
-                console.log('error', err);
-            } else {
-                resolve(res);
-            }
-        });
-     })
+const findOtherUser = (_id:string):Meteor.User => {
+    return Meteor.users.findOne(_id);
 };

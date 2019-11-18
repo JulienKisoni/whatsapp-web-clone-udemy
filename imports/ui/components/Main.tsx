@@ -9,30 +9,29 @@ import Left from './Left';
 
 import {chats, Chat, messages, Message, MessageType} from '../../api/models';
 import moment from 'moment';
-import { ChatsCollection } from '../../api/chats';
+
 import { findChats } from '../../api/helpers';
 
 const Main = (props : any) : JSX.Element => {
-    let chatsLoading:boolean;
-    let userReady:boolean;
-    Tracker.autorun(()=> {
-         chatsLoading = Meteor.subscribe('Chats.Mine').ready();
-        console.log('chats', findChats());
-    })
+    let chatsReady:boolean;
+        Tracker.autorun(() => {
+            chatsReady = Meteor.subscribe('Chats.Mine').ready();
+            console.log('theChats', findChats());
+            console.log('chatsReady', chatsReady);
+        });
+
     const [visible,
-        setVisible] = React.useState < boolean > (false);
-    const [chatArray,
-        setChats] = React.useState < Chat[] > ([...chats]);
+        setVisible] = React.useState<boolean>(false);
     const [selectedChat,
-        setSelectedChat] = React.useState < Chat > ({});
+        setSelectedChat] = React.useState<Chat>({});
     const [messageArray,
-        setMessages] = React.useState < Message[] > ([...messages]);
+        setMessages] = React.useState<Message[]>([...messages]);
     console.log('selected chat before', selectedChat);
-    const handleChatClick = (_id : string) : void => {
+    const handleChatClick = (_id : string):void => {
         if (!visible) {
             setVisible(true);
         }
-        const newChat : Chat = _.find(chatArray, {_id});
+        const newChat : Chat = _.find(findChats(), {_id});
         setSelectedChat(newChat);
         console.log('selected chat after', selectedChat);
     }
@@ -52,9 +51,9 @@ const Main = (props : any) : JSX.Element => {
     return (
             <StyledMain>
                 <Left
-                    chatsLoading={chatsLoading}
+                    chatsLoading={!chatsReady}
                     selectedChat={selectedChat}
-                    chats={chatArray}
+                    chats={findChats()}
                     onChatClick={handleChatClick}/>
                 <Right
                     right
