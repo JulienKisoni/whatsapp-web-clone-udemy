@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const imageUrl:string = './images/bg-whatsapp-message.png';
 
 const StyledMessageBox = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     width: calc(100% - 14.8rem);

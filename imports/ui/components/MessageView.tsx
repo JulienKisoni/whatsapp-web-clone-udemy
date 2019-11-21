@@ -11,13 +11,21 @@ import Footer from './Footer';
 import { Chat, Message, MessageType } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
 
-
 const MessageView = (props:any):JSX.Element => {
+    const icons:any[] = [
+        { name: "search", func: ()=>{}}, 
+        { name: "paperclip", func: ()=> {handlePaperClick()}}, 
+        {name: "ellipsis-v", func: ()=> {}}
+    ];
+    const [fabVisible, setFabVisible] = React.useState<boolean>(false);
     let messages:Message[];
     const selectedChat:Chat = props.selectedChat;
     Tracker.autorun(() => {
         messages = MessagesCollection.find({ chatId: selectedChat._id}).fetch()
     });
+    const handlePaperClick = () => {
+        setFabVisible(!fabVisible);
+    }
     const handleSend = (content:string):void => {
         const message:Message = {
             chatId: selectedChat._id,
@@ -36,7 +44,7 @@ const MessageView = (props:any):JSX.Element => {
     }
     return (
         <StyledMessageView>
-            <Header iconClass="greyIcon" icons={["search", "paperclip", "ellipsis-v"]}>
+            <Header iconClass="greyIcon" icons={icons}>
                 <Avatar size="4" avatar_url={selectedChat.picture} />
                 <div className="headerMsg--container">
                     <span className="headerMsg--title">{selectedChat.title}</span>
@@ -46,6 +54,7 @@ const MessageView = (props:any):JSX.Element => {
             <MessageBox 
                 messages={messages} 
                 selectedChat={props.selectedChat} 
+                fabVisible={fabVisible}
             />
             <Footer onSend={handleSend} />
         </StyledMessageView>

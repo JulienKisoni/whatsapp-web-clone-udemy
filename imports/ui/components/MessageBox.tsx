@@ -6,6 +6,7 @@ import FlipMove from 'react-flip-move';
 import {Meteor} from 'meteor/meteor';
 
 import Image from './Image';
+import FABs from './FABs';
 import StyledMessageBox from '../elements/StyledMessageBox';
 import {Message} from '../../api/models';
 
@@ -14,8 +15,7 @@ const format : string = 'D MMMM Y';
 let messagesEnd : HTMLDivElement;
 
 const MessageBox = (props : any) : JSX.Element => {
-    const {selectedChat, messages} = props;
-
+    const {selectedChat, messages, fabVisible } = props;
     //messages est un tableau
     messages.forEach((message : Message) => {
         message.ownership = message.senderId === Meteor.userId()
@@ -89,6 +89,7 @@ const MessageBox = (props : any) : JSX.Element => {
     }
     return (
         <StyledMessageBox>
+            <FABs fabVisible={fabVisible} />
             <FlipMove>
                 {renderDays()}
                 <>
