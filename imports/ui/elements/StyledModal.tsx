@@ -63,7 +63,7 @@ const StyledModal = styled.div`
     }
     .modal--footer__box {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: calc(9.5rem - 0.8rem);
@@ -71,6 +71,7 @@ const StyledModal = styled.div`
         padding: 0.4rem;
         background: white;
         margin-right: 0.8rem;
+        color: #19AEF5;
     }
 `
 

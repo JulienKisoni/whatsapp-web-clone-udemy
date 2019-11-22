@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import StyledMyModal from '../elements/StyledModal';
 
 const Modal = (props:any):JSX.Element => {
-    const { selectedImage } = props;
+    const { selectedImage, onClose } = props;
     return (
         <StyledMyModal>
             <div className="modal--header">
@@ -12,6 +12,7 @@ const Modal = (props:any):JSX.Element => {
                     className="modal--header__icon"
                     size="2x"
                     name="times"
+                    onClick={onClose}
                 />
                 <span className="modal--header__title">
                     Apercu
@@ -39,7 +40,11 @@ const Modal = (props:any):JSX.Element => {
                     />
                 </div>
                 <div className="modal--footer__box">
-
+                    <FontAwesome 
+                        size="2x"
+                        name="plus"
+                    />
+                    <span>AJOUTER</span>
                 </div>
             </div>
         </StyledMyModal>

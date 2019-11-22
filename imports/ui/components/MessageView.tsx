@@ -65,6 +65,10 @@ const MessageView = (props:any):JSX.Element => {
             reader.readAsDataURL(fileInput);
         }
     }
+    const handleClose = ():void => {
+        setModalVisible(false);
+        setFabVisible(false);
+    }
     return (
         <StyledMessageView>
             <Header iconClass="greyIcon" icons={icons}>
@@ -75,7 +79,7 @@ const MessageView = (props:any):JSX.Element => {
                 </div>
             </Header>
             {modalVisibe ? (
-                <Modal selectedImage={selectedImage} />
+                <Modal onClose={handleClose} selectedImage={selectedImage} />
             ) : (
                 <>
                     <MessageBox 
