@@ -5,6 +5,7 @@ const StyledMessageView = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 `;
 
 export default StyledMessageView;

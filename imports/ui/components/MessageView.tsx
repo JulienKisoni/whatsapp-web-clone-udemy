@@ -8,6 +8,7 @@ import Header from './Header';
 import MessageBox from './MessageBox';
 import Avatar from './Avatar';
 import Footer from './Footer';
+import Modal from './Modal';
 import { Chat, Message, MessageType } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
 
@@ -19,6 +20,8 @@ const MessageView = (props:any):JSX.Element => {
         { name: "paperclip", func: ()=> {handlePaperClick()}}, 
         {name: "ellipsis-v", func: ()=> {}}
     ];
+    const [modalVisibe, setModalVisible] = React.useState<boolean>(false);
+    const [selectedImage, setSelectedImage] = React.useState<any>("");
     const [fabVisible, setFabVisible] = React.useState<boolean>(false);
     let messages:Message[];
     const selectedChat:Chat = props.selectedChat;
@@ -52,6 +55,15 @@ const MessageView = (props:any):JSX.Element => {
     const handleInputChange = (e:any):void => {
         console.log('value',e.target.files[0]);
         fileInput = e.target.files[0];
+        if(fileInput) {
+            setModalVisible(true);
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                console.log('e', e.target.result);
+                setSelectedImage(e.target.result);
+            }
+            reader.readAsDataURL(fileInput);
+        }
     }
     return (
         <StyledMessageView>
@@ -62,14 +74,20 @@ const MessageView = (props:any):JSX.Element => {
                     <span className="headerMsg--sbTitle">en ligne</span>
                 </div>
             </Header>
-            <MessageBox 
-                messages={messages} 
-                selectedChat={props.selectedChat} 
-                fabVisible={fabVisible}
-                onFabItemClick={handleFabItemClick} 
-                onInputChange={handleInputChange} 
-            />
-            <Footer onSend={handleSend} />
+            {modalVisibe ? (
+                <Modal selectedImage={selectedImage} />
+            ) : (
+                <>
+                    <MessageBox 
+                        messages={messages} 
+                        selectedChat={props.selectedChat} 
+                        fabVisible={fabVisible}
+                        onFabItemClick={handleFabItemClick} 
+                        onInputChange={handleInputChange} 
+                    />
+                    <Footer onSend={handleSend} />
+                </>
+            )}
         </StyledMessageView>
     )
 }
