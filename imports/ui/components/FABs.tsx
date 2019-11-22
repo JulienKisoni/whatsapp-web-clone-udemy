@@ -3,17 +3,23 @@ import React from 'react';
 import FABItem from './FABItem';
 import StyledFABs from '../elements/StyledFABs';
 
-let upfile;
+let fileInput:any;
 
 const FABs = (props:any):JSX.Element => {
-    const upload = () => {
-        console.log('upfile', upfile);
-        upfile.click();
+    const { onFabItemClick, onInputChange } = props;
+    const upload = ():void => {
+    }
+    const getFile = (e):void => {
     }
     return (
         <StyledFABs fabVisible={props.fabVisible}>
-            <FABItem onClick={upload} iconName="image" bg="violet">
-                <input accept="image/*" type="file" ref={el => upfile = el}/>
+            <FABItem onClick={onFabItemClick} iconName="image" bg="violet">
+                <input 
+                    accept="image/*" 
+                    type="file" 
+                    id="fileupload"
+                    onChange={onInputChange}
+                />
             </FABItem>
             <FABItem iconName="camera" bg="orange" />
             <FABItem iconName="file" bg="blue" />

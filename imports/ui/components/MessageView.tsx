@@ -11,6 +11,8 @@ import Footer from './Footer';
 import { Chat, Message, MessageType } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
 
+let fileInput:any;
+
 const MessageView = (props:any):JSX.Element => {
     const icons:any[] = [
         { name: "search", func: ()=>{}}, 
@@ -42,6 +44,15 @@ const MessageView = (props:any):JSX.Element => {
             }
         });
     }
+    const handleFabItemClick = ():void => {
+        const myInput:any = document.getElementById('fileupload');
+        console.log('myInput', myInput);
+        myInput.click();
+    }
+    const handleInputChange = (e:any):void => {
+        console.log('value',e.target.files[0]);
+        fileInput = e.target.files[0];
+    }
     return (
         <StyledMessageView>
             <Header iconClass="greyIcon" icons={icons}>
@@ -55,6 +66,8 @@ const MessageView = (props:any):JSX.Element => {
                 messages={messages} 
                 selectedChat={props.selectedChat} 
                 fabVisible={fabVisible}
+                onFabItemClick={handleFabItemClick} 
+                onInputChange={handleInputChange} 
             />
             <Footer onSend={handleSend} />
         </StyledMessageView>

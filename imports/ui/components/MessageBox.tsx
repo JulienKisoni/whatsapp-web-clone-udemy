@@ -15,7 +15,14 @@ const format : string = 'D MMMM Y';
 let messagesEnd : HTMLDivElement;
 
 const MessageBox = (props : any) : JSX.Element => {
-    const {selectedChat, messages, fabVisible } = props;
+
+    const {
+        selectedChat, 
+        messages, 
+        fabVisible, 
+        onInputChange, 
+        onFabItemClick 
+    } = props;
     //messages est un tableau
     messages.forEach((message : Message) => {
         message.ownership = message.senderId === Meteor.userId()
@@ -89,7 +96,11 @@ const MessageBox = (props : any) : JSX.Element => {
     }
     return (
         <StyledMessageBox>
-            <FABs fabVisible={fabVisible} />
+            <FABs
+                onFabItemClick={onFabItemClick} 
+                onInputChange={onInputChange} 
+                fabVisible={fabVisible} 
+            />
             <FlipMove>
                 {renderDays()}
                 <>

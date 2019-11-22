@@ -1,8 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
 
 import { ChatsCollection } from './chats';
+import { Images } from './images';
 import { MessagesCollection } from './messages';
 import { User, Chat, Message } from './models';
 
@@ -66,4 +66,41 @@ const findLastMessage = (chatId:string):Message => {
     return MessagesCollection.find({ chatId }, {
         sort: { createdAt: -1 }
     }).fetch()[0];
+}
+
+export const uploadFile = (file:any):string => {
+    let imageUrl:string;
+    let uploadInstance = Images.insert({
+        file,
+        streams: "dynamic",
+        chunkSize: "dynamic",
+        allowWebWorkers: true
+    }, false);
+    uploadInstance.on('start', ()=> {
+        console.log('starting');
+    })
+    uploadInstance.on('end', (err, fileObj)=> {
+        // ça je vais expliquer
+        console.log('end', fileObj);
+        const id:string = fileObj.id;
+        Meteor.call("Images.url", id, (error, url:string) => {
+            if(error) {
+                console.log('error', error);
+                imageUrl = null;
+            } else {
+                imageUrl = url;
+            }
+        })
+    })
+    uploadInstance.on('uploaded', (err, fileObj)=> {
+        console.log('uploaded', fileObj);
+    })
+    uploadInstance.on('error', (error, fileObj)=> {
+        console.log('error during upload', error);
+    })
+    uploadInstance.on('progress', (progress, fileObj)=> {
+        console.log('upload percentage : ' + progress);
+    })
+    uploadInstance.start();
+    return imageUrl;
 }
