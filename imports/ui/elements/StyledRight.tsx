@@ -8,6 +8,7 @@ const StyledRight = styled.div`
 
     ${props => props.otherProfile && css`
         width: 40%;
+        border-right: 0.1rem solid rgba(0,0,0,0.2);
     `}
 `
 

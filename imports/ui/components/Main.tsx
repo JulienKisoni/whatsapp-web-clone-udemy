@@ -41,6 +41,12 @@ const Main = (props : any) : JSX.Element => {
             otherId
         });
     }
+    const handleCloseOP = ():void => {
+        setOtherProfile({
+            visible: false,
+            otherId: ""
+        });
+    }
     return (
             <StyledMain>
                 <Left
@@ -57,7 +63,7 @@ const Main = (props : any) : JSX.Element => {
                     onAvatarClick={handleAvatarClick}
                     />
                 {otherProfile.visible ? (
-                    <OtherProfile />
+                    <OtherProfile onClose={handleCloseOP} />
                 ):null}
             </StyledMain>
     )
