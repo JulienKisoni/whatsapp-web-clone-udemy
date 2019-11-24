@@ -13,5 +13,13 @@ Meteor.methods({
     "messages.insert": function(message) {
         console.log('insert message called');
         return MessagesCollection.insert(message);
+    },
+    "messages.update": function(_id:string, content:string) {
+        console.log('update message called');
+        return MessagesCollection.update({ _id }, { 
+            $set: {
+                content
+            }
+        });
     }
 });

@@ -7,10 +7,6 @@ let fileInput:any;
 
 const FABs = (props:any):JSX.Element => {
     const { onFabItemClick, onInputChange } = props;
-    const upload = ():void => {
-    }
-    const getFile = (e):void => {
-    }
     return (
         <StyledFABs fabVisible={props.fabVisible}>
             <FABItem onClick={onFabItemClick} iconName="image" bg="violet">

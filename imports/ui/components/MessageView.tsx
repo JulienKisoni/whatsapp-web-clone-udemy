@@ -2,6 +2,7 @@ import React from 'react';
 import { Tracker } from 'meteor/tracker';
 import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
 import StyledMessageView from '../elements/StyledMessageView';
 import Header from './Header';
@@ -11,6 +12,7 @@ import Footer from './Footer';
 import Modal from './Modal';
 import { Chat, Message, MessageType } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
+import { uploadFile } from '../../api/helpers';
 
 let fileInput:any;
 
@@ -31,21 +33,39 @@ const MessageView = (props:any):JSX.Element => {
     const handlePaperClick = () => {
         setFabVisible(!fabVisible);
     }
-    const handleSend = (content:string):void => {
+    const handleSend = (content:string, type:MessageType):void => {
         const message:Message = {
             chatId: selectedChat._id,
             content,
             createdAt: moment().toDate(),
-            type: MessageType.TEXT,
+            type,
             senderId: Meteor.userId()
         };
+        if(modalVisibe) {
+            setModalVisible(false);
+            setFabVisible(false);
+        }
         Meteor.call('messages.insert', message, (err, res)=> {
             if(res) {
                 console.log('res', res);
+                uploadFile(fileInput);
+                Tracker.autorun(() => {
+                    const imageUrl:string = Session.get("wp_imageUrl");
+                    if(imageUrl && message.type === "image") {
+                        Meteor.call("messages.update", res, imageUrl, (error, success)=> {
+                            if(error) {
+                                console.log('error update message', error);
+                            } else {
+                                console.log('success', success);
+                            }
+                        })
+                    }
+                })
             } else {
                 console.log('err', err);
             }
         });
+
     }
     const handleFabItemClick = ():void => {
         const myInput:any = document.getElementById('fileupload');
@@ -79,7 +99,11 @@ const MessageView = (props:any):JSX.Element => {
                 </div>
             </Header>
             {modalVisibe ? (
-                <Modal onClose={handleClose} selectedImage={selectedImage} />
+                <Modal 
+                    sendImage={handleSend}
+                    onClose={handleClose} 
+                    selectedImage={selectedImage} 
+                />
             ) : (
                 <>
                     <MessageBox 

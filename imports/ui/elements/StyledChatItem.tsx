@@ -48,6 +48,9 @@ const StyledChatItem = styled.div `
         margin-left: 0.6rem;
     }
     .content--message {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         font-size: 1.4rem;
         color: ${ ({
                     theme}) => theme.chatItem.color.message};

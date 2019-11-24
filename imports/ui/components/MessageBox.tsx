@@ -59,20 +59,26 @@ const MessageBox = (props : any) : JSX.Element => {
             .groupedMessages
             .map(groupedMsg => {
                 const msgClass = `message message--${groupedMsg.ownership}`;
-                return (
-                    <div key={groupedMsg._id} className="messageContainer">
-                        <div className={msgClass}>
-                            <p>{groupedMsg.content}</p>
-                            <div className="detailsContainer">
-                                <span>11:33</span>
-                                {groupedMsg.ownership === "mine"
-                                    ? (<FontAwesome name="check-double"/>)
-                                    : null
-}
+                if(groupedMsg.type === "text") {
+                    return (
+                        <div key={groupedMsg._id} className="messageContainer">
+                            <div className={msgClass}>
+                                <p>{groupedMsg.content}</p>
+                                <div className="detailsContainer">
+                                    <span>11:33</span>
+                                    {groupedMsg.ownership === "mine"
+                                        ? (<FontAwesome name="check-double"/>)
+                                        : null
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )
+                    )
+                } else {
+                    const loading:boolean = groupedMsg.content === "";
+                    const mine:boolean = groupedMsg.ownership === "mine";
+                    return <Image {...groupedMsg} loading={loading} mine={mine} />
+                }
             })
     }
     const renderDays = () : JSX.Element[] => {
@@ -103,21 +109,20 @@ const MessageBox = (props : any) : JSX.Element => {
             />
             <FlipMove>
                 {renderDays()}
-                <>
-                    <Image />
-                    <Image mine />
-                </>
-                <div className="image--container __mine">
-                </div>
+               {/*  <>
+                    <Image loading />
+                    <Image mine loading />
+                </> */}
             </FlipMove>
             <div
                 style={{
                 float: "left",
                 clear: "both"
-            }}
-                ref={(el : HTMLDivElement) => {
-                messagesEnd = el;
-            }}></div>
+                }}
+                    ref={(el : HTMLDivElement) => {
+                    messagesEnd = el;
+                }}>
+            </div>
         </StyledMessageBox>
     )
 }

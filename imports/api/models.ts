@@ -1,7 +1,8 @@
 import moment from 'moment';
 
 export enum MessageType {
-    TEXT = 'text'
+    TEXT = 'text',
+    IMAGE = 'image'
 }
 
 export interface Chat {

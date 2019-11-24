@@ -1,5 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
 import { ChatsCollection } from './chats';
 import { Images } from './images';
@@ -68,8 +69,7 @@ const findLastMessage = (chatId:string):Message => {
     }).fetch()[0];
 }
 
-export const uploadFile = (file:any):string => {
-    let imageUrl:string;
+export const uploadFile = (file:any):void => {
     let uploadInstance = Images.insert({
         file,
         streams: "dynamic",
@@ -82,13 +82,12 @@ export const uploadFile = (file:any):string => {
     uploadInstance.on('end', (err, fileObj)=> {
         // ça je vais expliquer
         console.log('end', fileObj);
-        const id:string = fileObj.id;
+        const id:string = fileObj._id;
         Meteor.call("Images.url", id, (error, url:string) => {
             if(error) {
                 console.log('error', error);
-                imageUrl = null;
             } else {
-                imageUrl = url;
+                Session.set("wp_imageUrl", url);
             }
         })
     })
@@ -102,5 +101,4 @@ export const uploadFile = (file:any):string => {
         console.log('upload percentage : ' + progress);
     })
     uploadInstance.start();
-    return imageUrl;
 }
