@@ -91,7 +91,7 @@ const MessageView = (props:any):JSX.Element => {
     }
     return (
         <StyledMessageView>
-            <Header iconClass="greyIcon" icons={icons}>
+            <Header onClick={()=> alert('click réussi !')} iconClass="greyIcon" icons={icons}>
                 <Avatar size="4" avatar_url={selectedChat.picture} />
                 <div className="headerMsg--container">
                     <span className="headerMsg--title">{selectedChat.title}</span>
