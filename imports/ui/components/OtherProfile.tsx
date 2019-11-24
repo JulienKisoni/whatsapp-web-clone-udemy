@@ -3,6 +3,7 @@ import FontAwesome from 'react-fontawesome';
 
 import StyledOtherProfile from '../elements/StyledOtherProfile';
 import Header from './Header';
+import Actu from './Actu';
 
 const icons:any[] = [
     { name: "", func: ()=>{}}, 
@@ -32,6 +33,7 @@ const OtherProfile = (props:any):JSX.Element => {
                     <span className="OPIC--sbTitle">en ligne</span>
                 </div>  
             </div>
+            <Actu />
         </StyledOtherProfile>
     )
 }
