@@ -77,7 +77,7 @@ const MessageBox = (props : any) : JSX.Element => {
                 } else {
                     const loading:boolean = groupedMsg.content === "";
                     const mine:boolean = groupedMsg.ownership === "mine";
-                    return <Image {...groupedMsg} loading={loading} mine={mine} />
+                    return <Image key={groupedMsg._id} {...groupedMsg} loading={loading} mine={mine} />
                 }
             })
     }
@@ -101,7 +101,7 @@ const MessageBox = (props : any) : JSX.Element => {
         })
     }
     return (
-        <StyledMessageBox>
+        <StyledMessageBox otherProfile={props.otherProfile}>
             <FABs
                 onFabItemClick={onFabItemClick} 
                 onInputChange={onInputChange} 

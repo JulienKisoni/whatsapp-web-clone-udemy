@@ -16,9 +16,9 @@ const icons:any[] = [
 ];
 
 const Left = (props:any):JSX.Element => {
-    const { onChatClick, chats, selectedChat, chatsLoading } = props;
+    const { onChatClick, chats, selectedChat, chatsLoading, otherProfile } = props;
     return (
-        <StyledLeft>
+        <StyledLeft otherProfile={otherProfile}>
             <Header iconClass="greyIcon" icons={icons}>
                 <Avatar avatar_url={Meteor.user().profile.picture} />
             </Header>

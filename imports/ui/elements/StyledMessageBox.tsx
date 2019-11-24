@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const imageUrl:string = './images/bg-whatsapp-message.png';
 
@@ -11,6 +11,11 @@ const StyledMessageBox = styled.div`
     padding: 1rem 7.4rem;
     overflow-y: auto;
     background-image: url(${imageUrl});
+
+    ${props=> props.otherProfile && css`
+        padding: 1rem 4.5rem;
+        width: calc(100% - 9rem);
+    `}
 
     &::-webkit-scrollbar {
         width: 0.5rem;
@@ -66,7 +71,7 @@ const StyledMessageBox = styled.div`
         color: ${({theme}) => theme.messageBox.color.message};
         background: ${({theme}) => theme.messageBox.color.messageBackground};
         border-radius: 0.7rem;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.4rem;
         width: auto;
         max-width: 65%;
         position: relative;

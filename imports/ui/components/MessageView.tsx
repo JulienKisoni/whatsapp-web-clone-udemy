@@ -12,7 +12,7 @@ import Footer from './Footer';
 import Modal from './Modal';
 import { Chat, Message, MessageType } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
-import { uploadFile } from '../../api/helpers';
+import { uploadFile, findOtherId } from '../../api/helpers';
 
 let fileInput:any;
 
@@ -89,10 +89,18 @@ const MessageView = (props:any):JSX.Element => {
         setModalVisible(false);
         setFabVisible(false);
     }
+    const avatarClick = ():void => {
+        const otherId:string = findOtherId(selectedChat.participants);
+        props.onAvatarClick(otherId);
+    }
     return (
-        <StyledMessageView>
-            <Header onClick={()=> alert('click réussi !')} iconClass="greyIcon" icons={icons}>
-                <Avatar size="4" avatar_url={selectedChat.picture} />
+        <StyledMessageView >
+            <Header otherProfile={props.otherProfile} iconClass="greyIcon" icons={icons}>
+                <Avatar 
+                    onAvatarClick={avatarClick} 
+                    size="4" 
+                    avatar_url={selectedChat.picture} 
+                />
                 <div className="headerMsg--container">
                     <span className="headerMsg--title">{selectedChat.title}</span>
                     <span className="headerMsg--sbTitle">en ligne</span>
@@ -112,6 +120,7 @@ const MessageView = (props:any):JSX.Element => {
                         fabVisible={fabVisible}
                         onFabItemClick={handleFabItemClick} 
                         onInputChange={handleInputChange} 
+                        otherProfile={props.otherProfile}
                     />
                     <Footer onSend={handleSend} />
                 </>

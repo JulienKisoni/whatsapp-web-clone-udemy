@@ -30,7 +30,7 @@ const ChatItem = (props:any):JSX.Element => {
                             <FontAwesome 
                                 name="camera"
                                 style={{
-                                    "margin-right": "0.4rem"
+                                    "marginRight": "0.4rem"
                                 }}
                             />
                             Photo

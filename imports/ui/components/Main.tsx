@@ -9,6 +9,7 @@ import Left from './Left';
 import { Chat } from '../../api/models';
 
 import { findChats } from '../../api/helpers';
+import OtherProfile from './OtherProfile';
 
 const Main = (props : any) : JSX.Element => {
     let chatsReady:boolean;
@@ -23,6 +24,7 @@ const Main = (props : any) : JSX.Element => {
         setVisible] = React.useState<boolean>(false);
     const [selectedChat,
         setSelectedChat] = React.useState<Chat>({});
+    const [otherProfile, setOtherProfile] = React.useState<any>({});
 
     console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
@@ -33,18 +35,30 @@ const Main = (props : any) : JSX.Element => {
         setSelectedChat(newChat);
         console.log('selected chat after', selectedChat);
     }
+    const handleAvatarClick = (otherId:string):void => {
+        setOtherProfile({
+            visible: true,
+            otherId
+        });
+    }
     return (
             <StyledMain>
                 <Left
+                    otherProfile={otherProfile.visible}
                     chatsLoading={!chatsReady}
                     selectedChat={selectedChat}
                     chats={findChats()}
                     onChatClick={handleChatClick}/>
                 <Right
+                    otherProfile={otherProfile.visible}
                     right
                     selectedChat={selectedChat}
                     visible={visible}
+                    onAvatarClick={handleAvatarClick}
                     />
+                {otherProfile.visible ? (
+                    <OtherProfile />
+                ):null}
             </StyledMain>
     )
 }

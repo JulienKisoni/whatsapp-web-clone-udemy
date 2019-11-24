@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import StyledHeader from '../elements/StyledHeader';
 
 const Header = (props:any):JSX.Element => {
-    const { icons, iconClass } = props;
+    const { icons, iconClass, children, otherProfile, iconsWidthSmall } = props;
     const renderIcons = ():JSX.Element[] => {
         return icons.map((icon:any, i:number) => {
             return (
@@ -18,9 +18,9 @@ const Header = (props:any):JSX.Element => {
         })
     }
     return (
-        <StyledHeader>
-            {props.children}
-            <div className={props.iconsWidthSmall ? "icons--left small" : "icons--left"}>
+        <StyledHeader otherProfile={otherProfile}>
+            {children}
+            <div className={iconsWidthSmall ? "icons--left small" : "icons--left"}>
                 {renderIcons()}
             </div>
         </StyledHeader>

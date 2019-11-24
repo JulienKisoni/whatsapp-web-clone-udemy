@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledHeader = styled.div`
     display: flex;
@@ -9,6 +9,12 @@ const StyledHeader = styled.div`
     height: 6%;
     background: ${ ({theme}) => theme.header.color.background};
     padding: 1rem 1.6rem;
+
+    ${props=> props.otherProfile && css`
+        .headerMsg--container {
+            width: 25rem !important;
+        }
+    `}
 
     .icons--left{
         display: flex;

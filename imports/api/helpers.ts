@@ -48,7 +48,7 @@ export const findChats = ():Chat[] => {
         });
 };
 
-const findOtherId = (participants:string[]):string => {
+export const findOtherId = (participants:string[]):string => {
     const myId:string = Meteor.userId();
     let otherId:string;
     if(myId === participants[0]) {
