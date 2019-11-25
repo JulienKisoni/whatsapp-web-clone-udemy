@@ -9,7 +9,7 @@ const StyledActu = styled.div`
     background: white;
     padding-left: 3rem;
     padding-top: 1.4rem;
-    margin-bottom: 1.9rem;
+    margin-bottom: 1rem;
 
     .actu--title {
         color: #128c7e;

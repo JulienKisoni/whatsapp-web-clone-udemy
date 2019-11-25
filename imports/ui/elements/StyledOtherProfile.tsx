@@ -7,6 +7,25 @@ const StyledOtherProfile = styled.div`
     display: flex;
     flex-direction: column;
 
+    .__scroll {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 0.2rem;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    }
     .OPH--heading {
         display: flex;
         flex-direction: row;
