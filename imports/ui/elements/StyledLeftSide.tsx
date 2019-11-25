@@ -36,6 +36,16 @@ const StyledLeftSide = styled.div`
         width: 100%;
         margin: 2.8rem 0rem;
     }
+    .LS--desc {
+        background: inherit;
+        text-align: justify;
+        padding: 1rem 3rem;
+        padding-bottom: 1.9rem;
+        font-size: 1.4rem;
+        height: 4rem;
+        width: calc(100% - 6rem);
+        color: #929FA6;
+    }
 `
 
 export default StyledLeftSide;

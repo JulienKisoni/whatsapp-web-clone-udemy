@@ -85,5 +85,8 @@ Meteor.methods({
             picture: otherUser.profile.picture,
             phone: otherUser.profile.phone
         }
+    },
+    'users.username': function(_id:string, username:string) {
+        return Accounts.setUsername(_id, username);
     }
 })

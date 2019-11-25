@@ -9,6 +9,7 @@ import ChatList from './ChatList';
 import Avatar from './Avatar';
 import LeftSide from './LeftSide';
 import LSHeader from './LSHeader';
+import LSForm from './LSForm';
 
 const avatar_url:string = "https://randomuser.me/api/portraits/thumb/men/1.jpg";
 const icons:any[] = [
@@ -35,6 +36,11 @@ const Left = (props:any):JSX.Element => {
                 <div className="LS--avatar">
                     <Avatar inLS big avatar_url={Meteor.user().profile.picture} />
                 </div>
+                <LSForm type="username" />
+                <div className="LS--desc">
+                    <span>Ce n'est pas votre nom d'utilisateur ou code pin. Ce nom sera visible auprès de vos contacts WhatsApp.</span>
+                </div>
+                <LSForm type="actu" />
             </>
         )
     }
