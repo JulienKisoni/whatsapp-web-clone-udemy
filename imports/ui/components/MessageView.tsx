@@ -122,7 +122,10 @@ const MessageView = (props:any):JSX.Element => {
                         onInputChange={handleInputChange} 
                         otherProfile={props.otherProfile}
                     />
-                    <Footer onSend={handleSend} />
+                    <Footer 
+                        otherProfile={props.otherProfile}
+                        onSend={handleSend} 
+                    />
                 </>
             )}
         </StyledMessageView>

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const StyledAvatar = styled.div`
+    position: relative;
     width: 4rem;
     height: 4rem;
     border-radius: 2rem;
@@ -11,6 +12,13 @@ const StyledAvatar = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    overflow: hidden;
+
+    ${props => props.big && css`
+        width: 20rem;
+        height: 20rem;
+        border-radius: 50%;
+    `}
 
     ${props => props.large && css`
         width: 4.9rem;
@@ -21,6 +29,24 @@ const StyledAvatar = styled.div`
     .avatar--img {
         width: 100%;
         height: 100%;
+    }
+    .avatar--overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 2.4rem;
+    }
+    .overlay--icon {
+        margin-bottom: 1.3rem;
+    }
+    .overlay--text {
+        font-size: 1.4rem;
     }
 `
 

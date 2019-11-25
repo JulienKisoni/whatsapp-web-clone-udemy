@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledFooter = styled.div`
     display: flex;
@@ -9,6 +9,12 @@ const StyledFooter = styled.div`
     height: 6%;
     background: ${({theme}) => theme.footer.color.background};
     padding: 1rem 1.6rem;
+
+    ${props => props.otherProfile && css`
+        .message--label {
+            width: 70% !important;
+        }
+    `}
 
     .message--label {
         background: ${({theme}) => theme.footer.color.labelBackground};

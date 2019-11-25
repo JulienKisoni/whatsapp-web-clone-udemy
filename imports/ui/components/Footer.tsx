@@ -19,7 +19,7 @@ const Footer = (props:any):JSX.Element => {
         setIconName("microphone");
     }
     return (
-        <StyledFooter>
+        <StyledFooter otherProfile={props.otherProfile}>
             <FontAwesome 
                 name="smile"
                 className="iconFooter"

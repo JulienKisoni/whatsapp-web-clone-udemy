@@ -6,6 +6,7 @@ import Header from './Header';
 import Actu from './Actu';
 import ActuItem from './ActuItem';
 import Spinner from './Spinner';
+import Avatar from './Avatar';
 import { User } from '../../api/models';
 import { findOtherUser } from '../../api/helpers';
 
@@ -36,9 +37,7 @@ const OtherProfile = (props:any):JSX.Element => {
                 </Header>
                 <div className="__scroll">
                     <div className="OP--imageContainer">
-                        <div className="OP--image">
-                            <img width="100%" height="100%" alt="" src={user.profile.picture} />
-                        </div>
+                        <Avatar big avatar_url={user.profile.picture} />
                         <div className="OPIC--txtContainer">
                             <span className="OPIC--title">{user.username}</span>
                             <span className="OPIC--sbTitle">en ligne</span>

@@ -7,6 +7,8 @@ import LeftStatus from './LeftStatus';
 import Searchbar from './Searchbar';
 import ChatList from './ChatList';
 import Avatar from './Avatar';
+import LeftSide from './LeftSide';
+import LSHeader from './LSHeader';
 
 const avatar_url:string = "https://randomuser.me/api/portraits/thumb/men/1.jpg";
 const icons:any[] = [
@@ -16,20 +18,58 @@ const icons:any[] = [
 ];
 
 const Left = (props:any):JSX.Element => {
-    const { onChatClick, chats, selectedChat, chatsLoading, otherProfile } = props;
+    const { 
+        onChatClick, 
+        chats, 
+        selectedChat, 
+        chatsLoading, 
+        otherProfile,
+    } = props;
+
+    const [LSVisible, setLSVisible] = React.useState<boolean>(false);
+
+    const renderChildren = ():JSX.Element => {
+        return (
+            <>
+                <LSHeader onCloseLS={toggleLS} />
+                <div className="LS--avatar">
+                    <Avatar inLS big avatar_url={Meteor.user().profile.picture} />
+                </div>
+            </>
+        )
+    }
+    const toggleLS = ():void => {
+        if(!LSVisible) {
+            setLSVisible(true);
+        } else {
+            setLSVisible(false)
+        }
+    }
+
     return (
         <StyledLeft otherProfile={otherProfile}>
-            <Header iconClass="greyIcon" icons={icons}>
-                <Avatar avatar_url={Meteor.user().profile.picture} />
-            </Header>
-            <LeftStatus />
-            <Searchbar />
-            <ChatList 
-                chatsLoading={chatsLoading}
-                chats={chats} 
-                onChatClick={onChatClick} 
-                selectedChat={selectedChat}
-            />
+            {!LSVisible ? (
+                <>
+                    <Header iconClass="greyIcon" icons={icons}>
+                        <Avatar 
+                            onAvatarClick={toggleLS}
+                            avatar_url={Meteor.user().profile.picture} 
+                        />
+                    </Header>
+                    <LeftStatus />
+                    <Searchbar />
+                    <ChatList 
+                        chatsLoading={chatsLoading}
+                        chats={chats} 
+                        onChatClick={onChatClick} 
+                        selectedChat={selectedChat}
+                    />
+                </>
+            ): (
+                <LeftSide>
+                    {renderChildren()}
+                </LeftSide>
+            )}
         </StyledLeft>
     )
 };
