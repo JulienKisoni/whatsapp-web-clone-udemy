@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { check } from 'meteor/check';
 
 import { User } from './models';
+import { Images } from './images';
 
 export const users : User[] = [
     {
@@ -88,5 +89,15 @@ Meteor.methods({
     },
     'users.username': function(_id:string, username:string) {
         return Accounts.setUsername(_id, username);
-    }
+    },
+    'users.picture': function(imageId:string) {
+            const image = Images.findOne(imageId);
+            const picture:string = image.link();
+            console.log('picture', picture);
+            return Meteor.users.update({_id: this.userId}, {
+                $set: {
+                    "profile.picture": picture
+                }
+            });
+        }
 })

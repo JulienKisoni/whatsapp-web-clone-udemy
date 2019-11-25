@@ -17,7 +17,7 @@ const Main = (props : any) : JSX.Element => {
             chatsReady = Meteor.subscribe('Chats.Mine').ready();
             Meteor.subscribe('messages.all');
             console.log('theChats', findChats());
-            console.log('chatsReady', chatsReady);
+            // console.log('chatsReady', chatsReady);
         });
 
     const [visible,
@@ -26,7 +26,7 @@ const Main = (props : any) : JSX.Element => {
         setSelectedChat] = React.useState<Chat>({});
     const [otherProfile, setOtherProfile] = React.useState<any>({});
 
-    console.log('selected chat before', selectedChat);
+    // console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
         if (!visible) {
             setVisible(true);
@@ -36,7 +36,7 @@ const Main = (props : any) : JSX.Element => {
         }
         const newChat : Chat = _.find(findChats(), {_id});
         setSelectedChat(newChat);
-        console.log('selected chat after', selectedChat);
+        // console.log('selected chat after', selectedChat);
     }
     const handleAvatarClick = (otherId:string):void => {
         setOtherProfile({

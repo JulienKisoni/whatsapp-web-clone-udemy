@@ -40,6 +40,7 @@ const StyledLSForm = styled.div`
         font-size: 1.7rem;
         text-align: right;
         color: rgba(0,0,0,0.3);
+        cursor: pointer;
     }
 `
 

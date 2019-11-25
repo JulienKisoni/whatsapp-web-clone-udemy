@@ -69,7 +69,7 @@ const findLastMessage = (chatId:string):Message => {
     }).fetch()[0];
 }
 
-export const uploadFile = (file:any):void => {
+export const uploadFile = (file:any, isMessage:boolean):void => {
     let uploadInstance = Images.insert({
         file,
         streams: "dynamic",
@@ -83,13 +83,23 @@ export const uploadFile = (file:any):void => {
         // ça je vais expliquer
         console.log('end', fileObj);
         const id:string = fileObj._id;
-        Meteor.call("Images.url", id, (error, url:string) => {
-            if(error) {
-                console.log('error', error);
-            } else {
-                Session.set("wp_imageUrl", url);
-            }
-        })
+        if(isMessage) {
+            Meteor.call("Images.url", id, (error, url:string) => {
+                if(error) {
+                    console.log('error', error);
+                } else {
+                    Session.set("wp_imageUrl", url);
+                }
+            })
+        } else {
+            Meteor.call('users.picture', id, (err, res) => {
+                if(err) {
+                    console.log('update picture error', err);
+                } else {
+                    console.log('update picture res', res);
+                }
+            });
+        }
     })
     uploadInstance.on('uploaded', (err, fileObj)=> {
         console.log('uploaded', fileObj);

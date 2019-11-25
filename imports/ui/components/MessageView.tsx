@@ -48,7 +48,7 @@ const MessageView = (props:any):JSX.Element => {
         Meteor.call('messages.insert', message, (err, res)=> {
             if(res) {
                 console.log('res', res);
-                uploadFile(fileInput);
+                uploadFile(fileInput, true);
                 Tracker.autorun(() => {
                     const imageUrl:string = Session.get("wp_imageUrl");
                     if(imageUrl && message.type === "image") {

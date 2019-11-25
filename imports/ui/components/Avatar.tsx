@@ -2,34 +2,50 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
 import StyledAvatar from '../elements/StyledAvatar';
+import {uploadFile} from '../../api/helpers';
 
-const Avatar = (props:any):JSX.Element => {
-    const { onAvatarClick, large, big, avatar_url, inLS } = props;
-    const [hover, setHover] = React.useState<boolean>(false);
+let avatarinput : any;
+window;
+const Avatar = (props : any) : JSX.Element => {
+    const {onAvatarClick, large, big, avatar_url, inLS} = props;
+    const [hover,
+        setHover] = React.useState < boolean > (false);
 
-    const showOverlay = ():void => {
-        if(!hover) {
+    const showOverlay = () : void => {
+        if (!hover) {
             setHover(true);
-            console.log('hover');
+            // console.log('hover');
         }
         return;
     }
-    const hideOverlay = ():void => {
-        if(hover) {
+    const hideOverlay = () : void => {
+        if (hover) {
             setHover(false);
-            console.log('hide overlay');
+            // console.log('hide overlay');
         }
         return;
     }
-    const renderOverlay = ():JSX.Element => {
-        if(inLS && hover) {
+    const handleInputChange = (e : any) : void => {
+        const file = e.target.files[0];
+        console.log('e', e);
+        if (file) {
+            uploadFile(file, false);
+        }
+        hideOverlay();
+    }
+    const handleOverlayClick = () : void => {
+        avatarinput = document.getElementById('avatarupload');
+        avatarinput.click();
+        console.log('avatarinput', avatarinput);
+    }
+    const renderOverlay = () : JSX.Element => {
+        if (inLS && hover) {
             return (
-                <div 
-                    onMouseLeave={hideOverlay} 
-                    onClick={onAvatarClick} 
-                    className="avatar--overlay"
-                >
-                    <FontAwesome className="overlay--icon" name="camera" />
+                <div
+                    onMouseLeave={hideOverlay}
+                    onClick={handleOverlayClick}
+                    className="avatar--overlay">
+                    <FontAwesome className="overlay--icon" name="camera"/>
                     <span className="overlay--text">CHANGER LA</span>
                     <span className="overlay--text">PHOTO DE</span>
                     <span className="overlay--text">PROFIL</span>
@@ -40,13 +56,19 @@ const Avatar = (props:any):JSX.Element => {
 
     return (
         <StyledAvatar big={big} large={large}>
-            <img 
+            <img
                 onClick={onAvatarClick}
-                alt="avatar" 
-                src={avatar_url} 
+                alt="avatar"
+                src={avatar_url}
                 className="avatar--img"
-                onMouseEnter={showOverlay}
-            />
+                onMouseEnter={showOverlay}/>
+
+            <input 
+                accept="image/*" 
+                type="file" 
+                id="avatarupload"
+                onChange={handleInputChange}
+            /> 
             {renderOverlay()}
         </StyledAvatar>
     )

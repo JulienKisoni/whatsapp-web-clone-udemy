@@ -48,6 +48,9 @@ const StyledAvatar = styled.div`
     .overlay--text {
         font-size: 1.4rem;
     }
+    input[type="file"] {
+        display: none;
+    }
 `
 
 export default StyledAvatar;
