@@ -26,6 +26,7 @@ export interface Message {
 export interface Profile {
   phone?: string;
   picture?: string;
+  actu?: string;
 }
 
 export interface User {

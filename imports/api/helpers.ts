@@ -59,7 +59,7 @@ export const findOtherId = (participants:string[]):string => {
     return otherId;
 }
 
-const findOtherUser = (_id:string):Meteor.User => {
+export const findOtherUser = (_id:string):Meteor.User => {
     return Meteor.users.findOne(_id);
 };
 

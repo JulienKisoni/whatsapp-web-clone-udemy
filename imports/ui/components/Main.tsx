@@ -31,6 +31,9 @@ const Main = (props : any) : JSX.Element => {
         if (!visible) {
             setVisible(true);
         }
+        if(otherProfile.visible) {
+            handleCloseOP();
+        }
         const newChat : Chat = _.find(findChats(), {_id});
         setSelectedChat(newChat);
         console.log('selected chat after', selectedChat);
@@ -63,7 +66,10 @@ const Main = (props : any) : JSX.Element => {
                     onAvatarClick={handleAvatarClick}
                     />
                 {otherProfile.visible ? (
-                    <OtherProfile onClose={handleCloseOP} />
+                    <OtherProfile 
+                        otherId={otherProfile.otherId} 
+                        onClose={handleCloseOP} 
+                    />
                 ):null}
             </StyledMain>
     )
