@@ -13,7 +13,7 @@ const Searchbar = (props:any):JSX.Element => {
                 />
                 <input 
                     className="searchbar--input" 
-                    placeholder="Rechercher ou démarrer une nouvelle discussion"    
+                    placeholder={props.placeholder}    
                 />
             </label>
         </StyledSearchbar>

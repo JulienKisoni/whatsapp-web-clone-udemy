@@ -16,8 +16,10 @@ const Main = (props : any) : JSX.Element => {
         Tracker.autorun(() => {
             chatsReady = Meteor.subscribe('Chats.Mine').ready();
             Meteor.subscribe('messages.all');
-            console.log('theChats', findChats());
             // console.log('chatsReady', chatsReady);
+            // if(chatsReady) {
+            //     console.log('theChats 2', findChats());
+            // }
         });
 
     const [visible,

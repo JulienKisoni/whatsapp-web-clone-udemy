@@ -10,13 +10,7 @@ import Avatar from './Avatar';
 import LeftSide from './LeftSide';
 import LSHeader from './LSHeader';
 import LSForm from './LSForm';
-
-const avatar_url:string = "https://randomuser.me/api/portraits/thumb/men/1.jpg";
-const icons:any[] = [
-    { name: "circle-notch", func: ()=>{}}, 
-    { name: "comment-alt", func: ()=> {}}, 
-    {name: "ellipsis-v", func: ()=> {}}
-];
+import UsersList from './UsersList';
 
 const Left = (props:any):JSX.Element => {
     const { 
@@ -28,11 +22,34 @@ const Left = (props:any):JSX.Element => {
     } = props;
 
     const [LSVisible, setLSVisible] = React.useState<boolean>(false);
+    const [showUList, setShowUList] = React.useState<boolean>(false);
+    const icons:any[] = [
+        { name: "circle-notch", func: ()=>{}}, 
+        { name: "comment-alt", func: ()=> {handleShowUserList()}}, 
+        {name: "ellipsis-v", func: ()=> {}}
+    ];
 
     const renderChildren = ():JSX.Element => {
+        if(showUList) {
+            return (
+                <>
+                    <LSHeader title="Nouvelle discussion" onCloseLS={toggleLS} />
+                    <Searchbar
+                        placeholder ="Chercher des contacts"
+                    />
+                    <UsersList users={Meteor.users.find({
+                        _id: {$ne : Meteor.userId()}
+                    }, {
+                        sort: {
+                            username: 1
+                        }
+                    }).fetch()} />
+                </>
+            )
+        }
         return (
             <>
-                <LSHeader onCloseLS={toggleLS} />
+                <LSHeader title="Profil" onCloseLS={toggleLS} />
                 <div className="LS--avatar">
                     <Avatar inLS big avatar_url={Meteor.user().profile.picture} />
                 </div>
@@ -48,8 +65,13 @@ const Left = (props:any):JSX.Element => {
         if(!LSVisible) {
             setLSVisible(true);
         } else {
-            setLSVisible(false)
+            setLSVisible(false);
+            setShowUList(false);
         }
+    }
+    const handleShowUserList = ():void => {
+        setShowUList(true);
+        setLSVisible(true)
     }
 
     return (
@@ -63,7 +85,9 @@ const Left = (props:any):JSX.Element => {
                         />
                     </Header>
                     <LeftStatus />
-                    <Searchbar />
+                    <Searchbar 
+                        placeholder ="Rechercher ou démarrer une nouvelle discussion"
+                    />
                     <ChatList 
                         chatsLoading={chatsLoading}
                         chats={chats} 

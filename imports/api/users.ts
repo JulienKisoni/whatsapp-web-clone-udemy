@@ -73,6 +73,7 @@ Meteor.methods({
                 username,
                 password, 
                 profile: {
+                    actu: "Salut! J'utilise WhatsApp.",
                     phone,
                     picture: "https://t3.ftcdn.net/jpg/01/09/00/64/240_F_109006426_388PagqielgjFTAMgW59jRaDmPJvSBUL.jpg",
                 }

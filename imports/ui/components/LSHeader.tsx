@@ -2,7 +2,7 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
 const LSHeader = (props : any) : JSX.Element => {
-    const { onCloseLS } = props;
+    const { onCloseLS, title } = props;
     return (
         <div className="LS--header">
             <div className="LS--header__line">
@@ -11,7 +11,7 @@ const LSHeader = (props : any) : JSX.Element => {
                     name="arrow-left" 
                     onClick={onCloseLS}
                 />
-                <span>Profil</span>
+                <span>{title}</span>
             </div>
         </div>
     )
