@@ -6,10 +6,12 @@ import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
 
-import { Chat } from '../../api/models';
+import { Chat, MessageType } from '../../api/models';
 
 import { findChats } from '../../api/helpers';
 import OtherProfile from './OtherProfile';
+import { ChatsCollection } from '../../api/chats';
+import moment from 'moment';
 
 const Main = (props : any) : JSX.Element => {
     let chatsReady:boolean;
@@ -52,6 +54,28 @@ const Main = (props : any) : JSX.Element => {
             otherId: ""
         });
     }
+    const handleUserItemClick = (userId:string):void => {
+        const chat:Chat = ChatsCollection.findOne({
+            participants: {
+                $in: [userId]
+            }
+        });
+        if(chat) {
+            handleChatClick(chat._id);
+        } else {
+            // const chatId:string = Meteor.call('chats.create', userId);
+            handleChatClick(ChatsCollection.insert({
+                title: "",
+                picture: "",
+                participants: [Meteor.userId(), userId],
+                lastMessage: {
+                    content: "",
+                    createdAt: moment().toDate(),
+                    type: MessageType.TEXT
+                }
+            }))
+        }
+    }
     return (
             <StyledMain>
                 <Left
@@ -59,7 +83,9 @@ const Main = (props : any) : JSX.Element => {
                     chatsLoading={!chatsReady}
                     selectedChat={selectedChat}
                     chats={findChats()}
-                    onChatClick={handleChatClick}/>
+                    onChatClick={handleChatClick}
+                    onUserItemClick={handleUserItemClick}
+                    />
                 <Right
                     otherProfile={otherProfile.visible}
                     right

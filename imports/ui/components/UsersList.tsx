@@ -36,9 +36,11 @@ const UsersList = (props:any):JSX.Element => {
             return (
                 <UserItem
                     key={user._id}
+                    id={user._id}
                     actu={user.profile.actu}
                     username={user.username}
                     picture={user.profile.picture}
+                    onUserItemClick={props.onUserItemClick}
                 />
             )
         })

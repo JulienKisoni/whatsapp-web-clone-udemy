@@ -2,7 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import moment from 'moment';
 
-import {Chat} from './models';
+import {Chat, MessageType} from './models';
 
 export const ChatsCollection = new Mongo.Collection<Chat>('Chats');
 
@@ -46,6 +46,21 @@ export const chats : Chat[] = [
 
     }
 ];
+
+Meteor.methods({
+    "chats.create": function(otherUserId:string) {
+        return ChatsCollection.insert({
+            title: "",
+            picture: "",
+            participants: [this.userId, otherUserId],
+            lastMessage: {
+                content: "",
+                createdAt: moment().toDate(),
+                type: MessageType.TEXT
+            }
+        })
+    }
+})
 
 if(Meteor.isServer) {
     Meteor.publish('Chats.All', function() {

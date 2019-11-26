@@ -19,6 +19,7 @@ const Left = (props:any):JSX.Element => {
         selectedChat, 
         chatsLoading, 
         otherProfile,
+        onUserItemClick
     } = props;
 
     const [LSVisible, setLSVisible] = React.useState<boolean>(false);
@@ -28,7 +29,10 @@ const Left = (props:any):JSX.Element => {
         { name: "comment-alt", func: ()=> {handleShowUserList()}}, 
         {name: "ellipsis-v", func: ()=> {}}
     ];
-
+    const userItemClick = (_id:string):void => {
+        toggleLS();
+        onUserItemClick(_id);
+    }
     const renderChildren = ():JSX.Element => {
         if(showUList) {
             return (
@@ -37,13 +41,16 @@ const Left = (props:any):JSX.Element => {
                     <Searchbar
                         placeholder ="Chercher des contacts"
                     />
-                    <UsersList users={Meteor.users.find({
+                    <UsersList 
+                        onUserItemClick={userItemClick}
+                        users={Meteor.users.find({
                         _id: {$ne : Meteor.userId()}
-                    }, {
-                        sort: {
-                            username: 1
-                        }
-                    }).fetch()} />
+                        }, {
+                            sort: {
+                                username: 1
+                            }
+                        }).fetch()} 
+                    />
                 </>
             )
         }

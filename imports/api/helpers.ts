@@ -64,9 +64,13 @@ export const findOtherUser = (_id:string):Meteor.User => {
 };
 
 const findLastMessage = (chatId:string):Message => {
-    return MessagesCollection.find({ chatId }, {
+    const Msg:Message[] = MessagesCollection.find({ chatId }, {
         sort: { createdAt: -1 }
-    }).fetch()[0];
+    }).fetch();
+    if(!Msg[0]) {
+        return ChatsCollection.findOne(chatId).lastMessage;
+    }
+    return Msg[0];
 }
 
 export const uploadFile = (file:any, isMessage:boolean):void => {
