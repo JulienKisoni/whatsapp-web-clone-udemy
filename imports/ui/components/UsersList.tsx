@@ -8,7 +8,7 @@ import { User } from '../../api/models';
 const UsersList = (props:any):JSX.Element => {
     const users:User[] = props.users;
     const groupedUsers = _.groupBy(users, (user:User) => {
-        return user.username[0];
+        return user.username.toUpperCase()[0];
     });
     const newUsers:any[] = Object
         .keys(groupedUsers)
@@ -19,8 +19,20 @@ const UsersList = (props:any):JSX.Element => {
             }
         });
     console.log('newUsers', newUsers);
-    const renderUserItem = ():JSX.Element[] => {
-        return users.map((user, i) => {
+    const renderLetters = ():JSX.Element[] => {
+        return newUsers.map((newUser, i) => {
+            return (
+                <React.Fragment key={i}>
+                    <div className="letter">
+                        {newUser.letter}
+                    </div>
+                    {renderUserItem(newUser.groupedUsers)}
+                </React.Fragment>
+            )
+        })
+    }
+    const renderUserItem = (userList:User[]):JSX.Element[] => {
+        return userList.map((user, i) => {
             return (
                 <UserItem
                     key={user._id}
@@ -34,7 +46,7 @@ const UsersList = (props:any):JSX.Element => {
 
     return (
         <StyledUsersList>
-            {renderUserItem()}
+            {renderLetters()}
         </StyledUsersList>
     )
 }
