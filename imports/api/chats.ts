@@ -56,7 +56,8 @@ Meteor.methods({
             lastMessage: {
                 content: "",
                 createdAt: moment().toDate(),
-                type: MessageType.TEXT
+                type: MessageType.TEXT,
+                read: false
             }
         })
     }

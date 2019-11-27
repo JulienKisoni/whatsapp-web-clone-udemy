@@ -116,3 +116,13 @@ export const uploadFile = (file:any, isMessage:boolean):void => {
     })
     uploadInstance.start();
 }
+
+export const findHisMessages = (messages:Message[]):void => {
+    // Mettre d'abord à jour la BDD pour que chaque message puisse avoir une prop read
+    // on peut aussi faire dans MessageBox
+    // MessagesCollection.find({chatId: "", senderId: "", read: false}).count();
+    const hisMessages:Message[] = messages.filter(message => {
+        return message.senderId !== Meteor.userId() && message.read === false;
+    });
+    console.log('ses messages', hisMessages);
+}

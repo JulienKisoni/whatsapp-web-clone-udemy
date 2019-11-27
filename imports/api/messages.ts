@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { Message } from './models';
 
-export const MessagesCollection = new Mongo.Collection('Messages');
+export const MessagesCollection:Mongo.Collection<Message> = new Mongo.Collection('Messages');
 
 if(Meteor.isServer){
     Meteor.publish('messages.all', function() {

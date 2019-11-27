@@ -12,7 +12,7 @@ import Footer from './Footer';
 import Modal from './Modal';
 import { Chat, Message, MessageType } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
-import { uploadFile, findOtherId } from '../../api/helpers';
+import { uploadFile, findOtherId, findHisMessages } from '../../api/helpers';
 
 let fileInput:any;
 
@@ -28,7 +28,8 @@ const MessageView = (props:any):JSX.Element => {
     let messages:Message[];
     const selectedChat:Chat = props.selectedChat;
     Tracker.autorun(() => {
-        messages = MessagesCollection.find({ chatId: selectedChat._id}).fetch()
+        messages = MessagesCollection.find({ chatId: selectedChat._id}).fetch();
+        findHisMessages(messages);
     });
     const handlePaperClick = () => {
         setFabVisible(!fabVisible);

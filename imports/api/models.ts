@@ -21,6 +21,7 @@ export interface Message {
     type?: MessageType;
     ownership?: string;
     senderId?: string;
+    read?: boolean;
 }
 
 export interface Profile {
