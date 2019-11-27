@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
@@ -80,6 +81,7 @@ const Main = (props : any) : JSX.Element => {
         }
     }
     const handleMsgClick = (msgId:string, type:string):void => {
+        Session.set('wp_message-id', msgId);
         setBigOverlay({
             visible: true,
             title: type==="text" ? "Supprimer le message ? " : "Supprimer l'image ? "
@@ -90,6 +92,16 @@ const Main = (props : any) : JSX.Element => {
             visible: false,
             title: "",
         })
+    }
+    const deleteMessage = ():void => {
+        const msgId:string = Session.get('wp_message-id');
+        Meteor.call('messages.delete', msgId, (err, res)=> {
+            if(err) {
+                console.log("error delete message", err);
+            } else {
+                handleClosePopup();
+            }
+        });
     }
     return (
             <StyledMain>
@@ -112,6 +124,7 @@ const Main = (props : any) : JSX.Element => {
                 {bigOverlay.visible ? (
                         <BigOverlay>
                             <Popup 
+                                onDelete={deleteMessage}
                                 onCancel={handleClosePopup} 
                                 title={bigOverlay.title} 
                             />

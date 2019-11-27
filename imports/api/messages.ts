@@ -21,5 +21,8 @@ Meteor.methods({
                 content
             }
         });
+    },
+    "messages.delete": function(messageId:string) {
+        return MessagesCollection.remove({ _id: messageId });
     }
 });
