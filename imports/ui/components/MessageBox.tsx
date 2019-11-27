@@ -21,7 +21,8 @@ const MessageBox = (props : any) : JSX.Element => {
         messages, 
         fabVisible, 
         onInputChange, 
-        onFabItemClick 
+        onFabItemClick,
+        onMessageClick
     } = props;
     //messages est un tableau
     messages.forEach((message : Message) => {
@@ -54,6 +55,16 @@ const MessageBox = (props : any) : JSX.Element => {
         scrollToBottom();
         console.log('useEffect called');
     }, [selectedChat, messages]);
+    const handleMessage = (e, msgId:string, type:string):void => {
+        const target = e.currentTarget;
+        console.log('msg click event', target);
+        if(target.classList.contains('message--mine')) {
+            onMessageClick(msgId, type);
+        } else {
+            return;
+        }
+
+    }
     const renderMessages = (newMsg) : JSX.Element[] => {
         return newMsg
             .groupedMessages
@@ -62,7 +73,7 @@ const MessageBox = (props : any) : JSX.Element => {
                 if(groupedMsg.type === "text") {
                     return (
                         <div key={groupedMsg._id} className="messageContainer">
-                            <div className={msgClass}>
+                            <div onClick={(e)=> handleMessage(e, groupedMsg._id, "text")} className={msgClass}>
                                 <p>{groupedMsg.content}</p>
                                 <div className="detailsContainer">
                                     <span>11:33</span>
@@ -77,7 +88,7 @@ const MessageBox = (props : any) : JSX.Element => {
                 } else {
                     const loading:boolean = groupedMsg.content === "";
                     const mine:boolean = groupedMsg.ownership === "mine";
-                    return <Image key={groupedMsg._id} {...groupedMsg} loading={loading} mine={mine} />
+                    return <Image onImageClick={()=> onMessageClick(groupedMsg._id, "image")} key={groupedMsg._id} {...groupedMsg} loading={loading} mine={mine} />
                 }
             })
     }

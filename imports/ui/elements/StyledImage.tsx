@@ -13,6 +13,7 @@ const StyledImage = styled.div`
     position: relative;
 
     ${props => props.mine && css`
+        cursor: pointer;
         background: ${({theme}) => theme.messageBox.color.messageMineBackground};
         margin-left: auto;
         .__date {

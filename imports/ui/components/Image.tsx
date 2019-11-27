@@ -8,7 +8,7 @@ import Spinner from './Spinner';
 const image_url:string = "https://cdn.pixabay.com/photo/2017/04/05/11/56/image-in-the-image-2204798_960_720.jpg";
 
 const Image = (props:any):JSX.Element => {
-    const { loading, mine, createdAt, content } = props;
+    const { loading, mine, createdAt, content, onImageClick } = props;
     const renderContent = ():JSX.Element => {
         if(loading) {
             return <Spinner />
@@ -38,6 +38,7 @@ const Image = (props:any):JSX.Element => {
                         className="image"
                         alt=""
                         src={content}
+                        onClick={onImageClick}
                     />
                     <div className="image--overlay">
                         <div className="detailsContainer __date">

@@ -31,7 +31,7 @@ const Main = (props : any) : JSX.Element => {
     const [selectedChat,
         setSelectedChat] = React.useState<Chat>({});
     const [otherProfile, setOtherProfile] = React.useState<any>({});
-    const [bigOverlayVisible, setBigOverlayVisible] = React.useState<boolean>(false);
+    const [bigOverlay, setBigOverlay] = React.useState<any>({});
 
     // console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
@@ -79,6 +79,18 @@ const Main = (props : any) : JSX.Element => {
             }))
         }
     }
+    const handleMsgClick = (msgId:string, type:string):void => {
+        setBigOverlay({
+            visible: true,
+            title: type==="text" ? "Supprimer le message ? " : "Supprimer l'image ? "
+        })
+    }
+    const handleClosePopup = ():void => {
+        setBigOverlay({
+            visible: false,
+            title: "",
+        })
+    }
     return (
             <StyledMain>
                 <Left
@@ -95,10 +107,14 @@ const Main = (props : any) : JSX.Element => {
                     selectedChat={selectedChat}
                     visible={visible}
                     onAvatarClick={handleAvatarClick}
+                    onMessageClick={handleMsgClick}
                     />
-                {bigOverlayVisible ? (
+                {bigOverlay.visible ? (
                         <BigOverlay>
-                            <Popup />
+                            <Popup 
+                                onCancel={handleClosePopup} 
+                                title={bigOverlay.title} 
+                            />
                         </BigOverlay>
                     ) : null }
                 {otherProfile.visible ? (

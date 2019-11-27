@@ -93,6 +93,7 @@ const StyledMessageBox = styled.div`
         background: ${({theme}) => theme.messageBox.color.messageMineBackground};
         margin-left: auto;
         align-items: flex-end;
+        cursor: pointer;
     }
 `
 

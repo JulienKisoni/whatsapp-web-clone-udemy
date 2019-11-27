@@ -121,6 +121,7 @@ const MessageView = (props:any):JSX.Element => {
                         onFabItemClick={handleFabItemClick} 
                         onInputChange={handleInputChange} 
                         otherProfile={props.otherProfile}
+                        onMessageClick={props.onMessageClick}
                     />
                     <Footer 
                         otherProfile={props.otherProfile}
