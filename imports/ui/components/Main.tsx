@@ -10,8 +10,10 @@ import { Chat, MessageType } from '../../api/models';
 
 import { findChats } from '../../api/helpers';
 import OtherProfile from './OtherProfile';
+import BigOverlay from './BigOverlay';
 import { ChatsCollection } from '../../api/chats';
 import moment from 'moment';
+import Popup from './Popup';
 
 const Main = (props : any) : JSX.Element => {
     let chatsReady:boolean;
@@ -29,6 +31,7 @@ const Main = (props : any) : JSX.Element => {
     const [selectedChat,
         setSelectedChat] = React.useState<Chat>({});
     const [otherProfile, setOtherProfile] = React.useState<any>({});
+    const [bigOverlayVisible, setBigOverlayVisible] = React.useState<boolean>(false);
 
     // console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
@@ -93,6 +96,11 @@ const Main = (props : any) : JSX.Element => {
                     visible={visible}
                     onAvatarClick={handleAvatarClick}
                     />
+                {bigOverlayVisible ? (
+                        <BigOverlay>
+                            <Popup />
+                        </BigOverlay>
+                    ) : null }
                 {otherProfile.visible ? (
                     <OtherProfile 
                         otherId={otherProfile.otherId} 
