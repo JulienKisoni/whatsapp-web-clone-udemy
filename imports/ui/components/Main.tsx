@@ -15,6 +15,18 @@ import BigOverlay from './BigOverlay';
 import { ChatsCollection } from '../../api/chats';
 import moment from 'moment';
 import Popup from './Popup';
+import ImageViewer from './ImageViewer';
+
+const initialOverlay:any = {
+    popup: {
+        visible: false,
+    },
+    image: {
+        visible: false,
+        url: ""
+    },
+    title: ""
+};
 
 const Main = (props : any) : JSX.Element => {
     let chatsReady:boolean;
@@ -32,7 +44,7 @@ const Main = (props : any) : JSX.Element => {
     const [selectedChat,
         setSelectedChat] = React.useState<Chat>({});
     const [otherProfile, setOtherProfile] = React.useState<any>({});
-    const [bigOverlay, setBigOverlay] = React.useState<any>({});
+    const [bigOverlay, setBigOverlay] = React.useState<any>(initialOverlay);
 
     // console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
@@ -83,14 +95,35 @@ const Main = (props : any) : JSX.Element => {
     const handleMsgClick = (msgId:string, type:string):void => {
         Session.set('wp_message-id', msgId);
         setBigOverlay({
-            visible: true,
+            popup: {
+                visible: true
+            },
+            image: {
+                visible: false,
+                url: "",
+            },
             title: type==="text" ? "Supprimer le message ? " : "Supprimer l'image ? "
         })
     }
     const handleClosePopup = ():void => {
         setBigOverlay({
-            visible: false,
+            popup: {
+                visible: false
+            },
+            image: {
+                visible: false,
+                url: ""
+            },
             title: "",
+        })
+    }
+    const showImage = (imageUrl:string):void => {
+        setBigOverlay({
+            ...initialOverlay,
+            image: {
+                visible: true,
+                url: imageUrl
+            }
         })
     }
     const deleteMessage = ():void => {
@@ -121,7 +154,7 @@ const Main = (props : any) : JSX.Element => {
                     onAvatarClick={handleAvatarClick}
                     onMessageClick={handleMsgClick}
                     />
-                {bigOverlay.visible ? (
+                {bigOverlay.popup.visible ? (
                         <BigOverlay>
                             <Popup 
                                 onDelete={deleteMessage}
@@ -130,10 +163,19 @@ const Main = (props : any) : JSX.Element => {
                             />
                         </BigOverlay>
                     ) : null }
+                {bigOverlay.image.visible ? (
+                        <BigOverlay>
+                            <ImageViewer
+                                onIVClose={handleClosePopup} 
+                                imageUrl={bigOverlay.image.url} 
+                            />
+                        </BigOverlay>
+                    ) : null }
                 {otherProfile.visible ? (
                     <OtherProfile 
                         otherId={otherProfile.otherId} 
                         onClose={handleCloseOP} 
+                        onShowImage={showImage}
                     />
                 ):null}
             </StyledMain>

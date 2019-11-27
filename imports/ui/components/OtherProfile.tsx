@@ -17,7 +17,7 @@ const icons:any[] = [
 ];
 
 const OtherProfile = (props:any):JSX.Element => {
-    const { onClose, otherId } = props;
+    const { onClose, otherId, onShowImage } = props;
     // console.log('user other', findOtherUser(otherId));
     const user:User = findOtherUser(otherId);
     // console.log('otherId', otherId);
@@ -37,7 +37,11 @@ const OtherProfile = (props:any):JSX.Element => {
                 </Header>
                 <div className="__scroll">
                     <div className="OP--imageContainer">
-                        <Avatar big avatar_url={user.profile.picture} />
+                        <Avatar 
+                            big 
+                            avatar_url={user.profile.picture} 
+                            onAvatarClick={() => onShowImage(user.profile.picture)}
+                        />
                         <div className="OPIC--txtContainer">
                             <span className="OPIC--title">{user.username}</span>
                             <span className="OPIC--sbTitle">en ligne</span>
