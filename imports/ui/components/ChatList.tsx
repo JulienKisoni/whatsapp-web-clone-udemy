@@ -7,7 +7,7 @@ import Spinner from './Spinner';
 import {Chat} from '../../api/models';
 
 const ChatList = (props : any) : JSX.Element => {
-    const {onChatClick, selectedChat, chats, chatsLoading} = props;
+    const {onChatClick, selectedChat, chats } = props;
     const renderChatItem = () : JSX.Element[] => {
         return chats.sort(function (a : Chat, b : Chat) {
             // Turn your strings into dates, and then subtract them to get a value that is

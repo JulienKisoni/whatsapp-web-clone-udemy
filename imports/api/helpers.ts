@@ -117,12 +117,14 @@ export const uploadFile = (file:any, isMessage:boolean):void => {
     uploadInstance.start();
 }
 
-export const findHisMessages = (messages:Message[]):void => {
-    // Mettre d'abord à jour la BDD pour que chaque message puisse avoir une prop read
-    // on peut aussi faire dans MessageBox
-    // MessagesCollection.find({chatId: "", senderId: "", read: false}).count();
-    const hisMessages:Message[] = messages.filter(message => {
-        return message.senderId !== Meteor.userId() && message.read === false;
-    });
-    console.log('ses messages', hisMessages);
+export const getBadges = (chatId:string):number => {
+    const participants:string[] = ChatsCollection.findOne(chatId).participants;
+    const otherId:string = findOtherId(participants);
+    const badge:number = MessagesCollection.find({ chatId, senderId: otherId , read: false }).count();
+    return badge;
+}
+
+export const updateBadges = (participants:string[], chatId:string):void => {
+    const otherId:string = findOtherId(participants);
+    Meteor.call("messages.update.badge", chatId, otherId);
 }

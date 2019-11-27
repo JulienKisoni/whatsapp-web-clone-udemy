@@ -25,5 +25,15 @@ Meteor.methods({
     },
     "messages.delete": function(messageId:string) {
         return MessagesCollection.remove({ _id: messageId });
+    },
+    "messages.update.badge": function(chatId:string, otherId:string) {
+        console.log('update badge called');
+        return MessagesCollection.update({ chatId, senderId: otherId, read: false }, {
+            $set: {
+                read: true
+            }
+        }, {
+            multi: true
+        })
     }
 });

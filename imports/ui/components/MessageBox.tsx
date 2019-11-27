@@ -31,12 +31,12 @@ const MessageBox = (props : any) : JSX.Element => {
             : 'other';
         return message;
     })
-    console.log('messages normales', messages);
+    // console.log('messages normales', messages);
     //groupedMessages est un objet (un dictionnaire)
     const groupedMessages : any = _.groupBy(messages, message => {
         return moment(message.createdAt).format(format);
     });
-    console.log('groupedMessages', groupedMessages);
+    // console.log('groupedMessages', groupedMessages);
     const newMessages : any[] = Object
         .keys(groupedMessages)
         .map(timestamp => {
@@ -46,18 +46,18 @@ const MessageBox = (props : any) : JSX.Element => {
                 today: moment().format(format) === timestamp
             }
         });
-    console.log('new messages', newMessages);
+    // console.log('new messages', newMessages);
     const scrollToBottom = () => {
         messagesEnd.scrollIntoView({behavior: "smooth"});
-        console.log('scroll to bottom function called');
+        // console.log('scroll to bottom function called');
     }
     React.useEffect(() => {
         scrollToBottom();
-        console.log('useEffect called');
+        // console.log('useEffect called');
     }, [selectedChat, messages]);
     const handleMessage = (e, msgId:string, type:string):void => {
         const target = e.currentTarget;
-        console.log('msg click event', target);
+        // console.log('msg click event', target);
         if(target.classList.contains('message--mine')) {
             onMessageClick(msgId, type);
         } else {
