@@ -11,6 +11,9 @@ import LeftSide from './LeftSide';
 import LSHeader from './LSHeader';
 import LSForm from './LSForm';
 import UsersList from './UsersList';
+import { User } from '../../api/models';
+
+// let users:User[];
 
 const Left = (props:any):JSX.Element => {
     const { 
@@ -22,6 +25,20 @@ const Left = (props:any):JSX.Element => {
         onUserItemClick
     } = props;
 
+    
+    const initialUsers:User[] = Meteor.users.find({
+        _id: {$ne : Meteor.userId()}
+        }, {
+            sort: {
+                username: 1
+            }
+        }).fetch();
+    const [users, setUsers] = React.useState<User[]>(initialUsers)
+
+    // React.useEffect(() => {
+    //     console.log('use effect of users');
+    // }, [users]);
+
     const [LSVisible, setLSVisible] = React.useState<boolean>(false);
     const [showUList, setShowUList] = React.useState<boolean>(false);
     const icons:any[] = [
@@ -32,6 +49,20 @@ const Left = (props:any):JSX.Element => {
     const userItemClick = (_id:string):void => {
         toggleLS();
         onUserItemClick(_id);
+        setUsers(initialUsers);
+    }
+    const handleUserSearch = (pattern:string):void => {
+        console.log('handleUserSearch', pattern);
+        const newUsers = Meteor.users.find({
+            _id: {$ne : Meteor.userId()},
+            username: { $regex: pattern, $options: 'i' }
+            }, {
+                sort: {
+                    username: 1
+                }
+            }).fetch();
+        console.log('users 2', users);
+        setUsers(newUsers);
     }
     const renderChildren = ():JSX.Element => {
         if(showUList) {
@@ -40,16 +71,11 @@ const Left = (props:any):JSX.Element => {
                     <LSHeader title="Nouvelle discussion" onCloseLS={toggleLS} />
                     <Searchbar
                         placeholder ="Chercher des contacts"
+                        onSearch={handleUserSearch}
                     />
                     <UsersList 
                         onUserItemClick={userItemClick}
-                        users={Meteor.users.find({
-                        _id: {$ne : Meteor.userId()}
-                        }, {
-                            sort: {
-                                username: 1
-                            }
-                        }).fetch()} 
+                        users={users} 
                     />
                 </>
             )
