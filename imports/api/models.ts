@@ -56,6 +56,24 @@ export interface IVisible {
   otherId?: string;
 }
 
+export interface IMainState {
+  visible: boolean;
+  selectedChat: Chat;
+  otherProfile: IVisible;
+  bigOverlay: IOverlay;
+}
+
+export interface ILeftState {
+  users: User[];
+  LSVisible: boolean;
+  showUList: boolean;
+}
+
+export interface IMsgViewState {
+  modalVisible: boolean;
+  selectedImage: any;
+  fabVisible: boolean;
+}
     export const messages:Message[] = [
       {
         chatId: "cNZEJf2bfW6fbYoBM",

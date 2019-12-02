@@ -10,7 +10,7 @@ import MessageBox from './MessageBox';
 import Avatar from './Avatar';
 import Footer from './Footer';
 import Modal from './Modal';
-import { Chat, Message, MessageType, Iicon } from '../../api/models';
+import { Chat, Message, MessageType, Iicon, IMsgViewState } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
 import { uploadFile, findOtherId } from '../../api/helpers';
 
@@ -22,16 +22,25 @@ const MessageView = (props:any):JSX.Element => {
         { name: "paperclip", func: ()=> {handlePaperClick()}}, 
         {name: "ellipsis-v", func: ()=> {}}
     ];
-    const [modalVisibe, setModalVisible] = React.useState<boolean>(false);
-    const [selectedImage, setSelectedImage] = React.useState<any>("");
-    const [fabVisible, setFabVisible] = React.useState<boolean>(false);
+    const initialState:IMsgViewState = {
+        modalVisible: false,
+        selectedImage: "",
+        fabVisible: false
+    }
+    const [state, setState] = React.useState<IMsgViewState>(initialState);
+    const { modalVisible, selectedImage, fabVisible } = state;
     let messages:Message[];
     const selectedChat:Chat = props.selectedChat;
     Tracker.autorun(() => {
         messages = MessagesCollection.find({ chatId: selectedChat._id}).fetch();
     });
     const handlePaperClick = () => {
-        setFabVisible(!fabVisible);
+        setState(prevState => {
+            return {
+                ...prevState,
+                fabVisible: !prevState.fabVisible
+            }
+        })
     }
     const handleSend = (content:string, type:MessageType):void => {
         const message:Message = {
@@ -42,9 +51,14 @@ const MessageView = (props:any):JSX.Element => {
             senderId: Meteor.userId(),
             read: false
         };
-        if(modalVisibe) {
-            setModalVisible(false);
-            setFabVisible(false);
+        if(modalVisible) {
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    modalVisible: false,
+                    fabVisible: false
+                }
+            })
         }
         Meteor.call('messages.insert', message, (err, res)=> {
             if(res) {
@@ -77,18 +91,33 @@ const MessageView = (props:any):JSX.Element => {
         console.log('value',e.target.files[0]);
         fileInput = e.target.files[0];
         if(fileInput) {
-            setModalVisible(true);
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    modalVisible: true
+                }
+            })
             let reader = new FileReader();
             reader.onload = function(e) {
                 console.log('e', e.target.result);
-                setSelectedImage(e.target.result);
+                setState(prevState => {
+                    return {
+                        ...prevState,
+                        selectedImage: e.target.result
+                    }
+                })
             }
             reader.readAsDataURL(fileInput);
         }
     }
     const handleClose = ():void => {
-        setModalVisible(false);
-        setFabVisible(false);
+        setState(prevState => {
+            return {
+                ...prevState,
+                modalVisible: false,
+                fabVisible: false
+            }
+        })
     }
     const avatarClick = ():void => {
         const otherId:string = findOtherId(selectedChat.participants);
@@ -107,7 +136,7 @@ const MessageView = (props:any):JSX.Element => {
                     <span className="headerMsg--sbTitle">en ligne</span>
                 </div>
             </Header>
-            {modalVisibe ? (
+            {modalVisible ? (
                 <Modal 
                     sendImage={handleSend}
                     onClose={handleClose} 

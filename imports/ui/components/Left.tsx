@@ -11,9 +11,7 @@ import LeftSide from './LeftSide';
 import LSHeader from './LSHeader';
 import LSForm from './LSForm';
 import UsersList from './UsersList';
-import { User, Iicon } from '../../api/models';
-
-// let users:User[];
+import { User, Iicon, ILeftState } from '../../api/models';
 
 const Left = (props:any):JSX.Element => {
     const { 
@@ -33,14 +31,15 @@ const Left = (props:any):JSX.Element => {
                 username: 1
             }
         }).fetch();
-    const [users, setUsers] = React.useState<User[]>(initialUsers)
 
-    // React.useEffect(() => {
-    //     console.log('use effect of users');
-    // }, [users]);
-
-    const [LSVisible, setLSVisible] = React.useState<boolean>(false);
-    const [showUList, setShowUList] = React.useState<boolean>(false);
+        const initialState:ILeftState = {
+            users: initialUsers,
+            LSVisible: false,
+            showUList: false
+        }
+    
+    const [state, setState] = React.useState<ILeftState>(initialState);
+    const {users, LSVisible, showUList} = state;
     const icons:Iicon[] = [
         { name: "circle-notch", func: ()=>{}}, 
         { name: "comment-alt", func: ()=> {handleShowUserList()}}, 
@@ -49,7 +48,12 @@ const Left = (props:any):JSX.Element => {
     const userItemClick = (_id:string):void => {
         toggleLS();
         onUserItemClick(_id);
-        setUsers(initialUsers);
+        setState(prevState => {
+            return {
+                ...prevState,
+                users: initialUsers
+            }
+        })
     }
     const handleUserSearch = (pattern:string):void => {
         console.log('handleUserSearch', pattern);
@@ -62,7 +66,12 @@ const Left = (props:any):JSX.Element => {
                 }
             }).fetch();
         console.log('users 2', users);
-        setUsers(newUsers);
+        setState(prevState => {
+            return {
+                ...prevState,
+                users: newUsers
+            }
+        })
     }
     const renderChildren = ():JSX.Element => {
         if(showUList) {
@@ -96,15 +105,30 @@ const Left = (props:any):JSX.Element => {
     }
     const toggleLS = ():void => {
         if(!LSVisible) {
-            setLSVisible(true);
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    LSVisible: true
+                }
+            });
         } else {
-            setLSVisible(false);
-            setShowUList(false);
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    LSVisible: false,
+                    showUList: false
+                }
+            });
         }
     }
     const handleShowUserList = ():void => {
-        setShowUList(true);
-        setLSVisible(true)
+        setState(prevState => {
+            return {
+                ...prevState,
+                LSVisible: true,
+                showUList: true
+            }
+        });
     }
 
     return (

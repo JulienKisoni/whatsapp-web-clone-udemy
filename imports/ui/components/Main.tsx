@@ -7,7 +7,7 @@ import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
 
-import { Chat, MessageType, IOverlay, IVisible } from '../../api/models';
+import { Chat, MessageType, IOverlay, IMainState } from '../../api/models';
 
 import { findChats } from '../../api/helpers';
 import OtherProfile from './OtherProfile';
@@ -28,47 +28,65 @@ const initialOverlay:IOverlay = {
     title: ""
 };
 
+const initialState:IMainState = {
+    visible: false,
+    selectedChat: {},
+    otherProfile: {},
+    bigOverlay: initialOverlay
+}
+
 const Main = (props : any) : JSX.Element => {
     let chatsReady:boolean;
         Tracker.autorun(() => {
             chatsReady = Meteor.subscribe('Chats.Mine').ready();
             Meteor.subscribe('messages.all');
-            // console.log('chatsReady', chatsReady);
-            // if(chatsReady) {
-            //     console.log('theChats 2', findChats());
-            // }
         });
 
-    const [visible,
-        setVisible] = React.useState<boolean>(false);
-    const [selectedChat,
-        setSelectedChat] = React.useState<Chat>({});
-    const [otherProfile, setOtherProfile] = React.useState<IVisible>({});
-    const [bigOverlay, setBigOverlay] = React.useState<IOverlay>(initialOverlay);
+    const [state, setState] = React.useState<IMainState>(initialState);
+    const {visible, selectedChat, otherProfile, bigOverlay} = state;
 
     // console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {
         if (!visible) {
-            setVisible(true);
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    visible: true
+                }
+            });
         }
         if(otherProfile.visible) {
             handleCloseOP();
         }
         const newChat : Chat = _.find(findChats(), {_id});
-        setSelectedChat(newChat);
+        setState(prevState => {
+            return {
+                ...prevState,
+                selectedChat: newChat
+            }
+        });
         // console.log('selected chat after', selectedChat);
     }
     const handleAvatarClick = (otherId:string):void => {
-        setOtherProfile({
-            visible: true,
-            otherId
+        setState(prevState => {
+            return {
+                ...prevState,
+                otherProfile: {
+                    visible: true,
+                    otherId
+                }
+            }
         });
     }
-    const handleCloseOP = ():void => {
-        setOtherProfile({
-            visible: false,
-            otherId: ""
-        });
+    const handleCloseOP = ():void => { setState(prevState => {
+        return {
+            ...prevState,
+            otherProfile: {
+                visible: true,
+                otherId: ""
+            }
+        }
+    });
     }
     const handleUserItemClick = (userId:string):void => {
         const chat:Chat = ChatsCollection.findOne({
@@ -94,35 +112,50 @@ const Main = (props : any) : JSX.Element => {
     }
     const handleMsgClick = (msgId:string, type:string):void => {
         Session.set('wp_message-id', msgId);
-        setBigOverlay({
-            popup: {
-                visible: true
-            },
-            image: {
-                visible: false,
-                url: "",
-            },
-            title: type==="text" ? "Supprimer le message ? " : "Supprimer l'image ? "
+        setState(prevState => {
+            return {
+                ...prevState,
+                bigOverlay: {
+                        popup: {
+                            visible: true
+                        },
+                        image: {
+                            visible: false,
+                            url: "",
+                        },
+                        title: type==="text" ? "Supprimer le message ? " : "Supprimer l'image ? "
+                    }
+            }
         })
     }
     const handleClosePopup = ():void => {
-        setBigOverlay({
-            popup: {
-                visible: false
-            },
-            image: {
-                visible: false,
-                url: ""
-            },
-            title: "",
+        setState(prevState => {
+            return {
+                ...prevState,
+                bigOverlay: {
+                    popup: {
+                        visible: false
+                    },
+                    image: {
+                        visible: false,
+                        url: ""
+                    },
+                    title: "",
+                }
+            }
         })
     }
     const showImage = (imageUrl:string):void => {
-        setBigOverlay({
-            ...initialOverlay,
-            image: {
-                visible: true,
-                url: imageUrl
+        setState(prevState => {
+            return {
+                ...prevState,
+                bigOverlay: {
+                    ...initialOverlay,
+                    image: {
+                        visible: true,
+                        url: imageUrl
+                    }
+                }
             }
         })
     }
