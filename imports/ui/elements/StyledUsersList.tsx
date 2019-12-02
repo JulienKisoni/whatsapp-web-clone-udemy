@@ -5,7 +5,7 @@ import StyledChatList from './StyledChatList';
 const StyledUsersList = styled(StyledChatList)`
     height: 80%;
     .letter {
-        height: 7.2rem;
+        max-height: 7.2rem;
         font-size: 1.6rem;
         color: #009688;
         text-transform: uppercase;
