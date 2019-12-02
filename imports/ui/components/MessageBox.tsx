@@ -55,7 +55,7 @@ const MessageBox = (props : any) : JSX.Element => {
         scrollToBottom();
         // console.log('useEffect called');
     }, [selectedChat, messages]);
-    const handleMessage = (e, msgId:string, type:string):void => {
+    const handleMessage = (e:React.MouseEvent, msgId:string, type:string):void => {
         const target = e.currentTarget;
         // console.log('msg click event', target);
         if(target.classList.contains('message--mine')) {
@@ -65,7 +65,7 @@ const MessageBox = (props : any) : JSX.Element => {
         }
 
     }
-    const renderMessages = (newMsg) : JSX.Element[] => {
+    const renderMessages = (newMsg:any) : JSX.Element[] => {
         return newMsg
             .groupedMessages
             .map(groupedMsg => {

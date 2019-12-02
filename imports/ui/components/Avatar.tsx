@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import StyledAvatar from '../elements/StyledAvatar';
 import {uploadFile} from '../../api/helpers';
 
-let avatarinput : any;
+let avatarinput : HTMLElement;
 window;
 const Avatar = (props : any) : JSX.Element => {
     const {onAvatarClick, large, big, avatar_url, inLS} = props;
@@ -25,7 +25,7 @@ const Avatar = (props : any) : JSX.Element => {
         }
         return;
     }
-    const handleInputChange = (e : any) : void => {
+    const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) : void => {
         const file = e.target.files[0];
         console.log('e', e);
         if (file) {

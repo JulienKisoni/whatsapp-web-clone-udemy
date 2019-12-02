@@ -15,7 +15,7 @@ const Input = (props:any):JSX.Element => {
     };
     const [userInput, setUserInput] = React.useReducer(reducer, defaultState);
     const { username, password, phone } = userInput;
-    const handleChange = (e:any):void => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
         setUserInput({
             [e.target.name]: e.target.value
         });

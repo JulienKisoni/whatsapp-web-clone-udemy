@@ -11,7 +11,7 @@ import LeftSide from './LeftSide';
 import LSHeader from './LSHeader';
 import LSForm from './LSForm';
 import UsersList from './UsersList';
-import { User } from '../../api/models';
+import { User, Iicon } from '../../api/models';
 
 // let users:User[];
 
@@ -41,7 +41,7 @@ const Left = (props:any):JSX.Element => {
 
     const [LSVisible, setLSVisible] = React.useState<boolean>(false);
     const [showUList, setShowUList] = React.useState<boolean>(false);
-    const icons:any[] = [
+    const icons:Iicon[] = [
         { name: "circle-notch", func: ()=>{}}, 
         { name: "comment-alt", func: ()=> {handleShowUserList()}}, 
         {name: "ellipsis-v", func: ()=> {}}

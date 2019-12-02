@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import {Chat, MessageType} from './models';
 
-export const ChatsCollection = new Mongo.Collection<Chat>('Chats');
+export const ChatsCollection:Mongo.Collection<Chat> = new Mongo.Collection<Chat>('Chats');
 
 export const chats : Chat[] = [
     {

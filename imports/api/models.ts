@@ -39,6 +39,23 @@ export interface User {
   profile?: Profile;
 }
 
+export interface Iicon {
+  name: string;
+  func: ()=>void;
+}
+
+export interface IOverlay {
+  popup: IVisible;
+  image: IVisible;
+  title: string;
+}
+
+export interface IVisible {
+  visible?: boolean;
+  url?: string;
+  otherId?: string;
+}
+
     export const messages:Message[] = [
       {
         chatId: "cNZEJf2bfW6fbYoBM",

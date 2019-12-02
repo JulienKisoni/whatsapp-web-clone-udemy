@@ -10,14 +10,14 @@ import MessageBox from './MessageBox';
 import Avatar from './Avatar';
 import Footer from './Footer';
 import Modal from './Modal';
-import { Chat, Message, MessageType } from '../../api/models';
+import { Chat, Message, MessageType, Iicon } from '../../api/models';
 import { MessagesCollection } from '../../api/messages';
 import { uploadFile, findOtherId } from '../../api/helpers';
 
 let fileInput:any;
 
 const MessageView = (props:any):JSX.Element => {
-    const icons:any[] = [
+    const icons:Iicon[] = [
         { name: "search", func: ()=>{}}, 
         { name: "paperclip", func: ()=> {handlePaperClick()}}, 
         {name: "ellipsis-v", func: ()=> {}}
@@ -73,7 +73,7 @@ const MessageView = (props:any):JSX.Element => {
         console.log('myInput', myInput);
         myInput.click();
     }
-    const handleInputChange = (e:any):void => {
+    const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
         console.log('value',e.target.files[0]);
         fileInput = e.target.files[0];
         if(fileInput) {

@@ -1,12 +1,10 @@
 import React from 'react';
 import Moment from 'react-moment';
 import FontAwesome from 'react-fontawesome';
-import { Tracker } from 'meteor/tracker';
 
 import StyledChatItem from '../elements/StyledChatItem';
 import Avatar from './Avatar';
 import { getBadges, updateBadges } from '../../api/helpers';
-import { MessagesCollection } from '../../api/messages';
 
 const ChatItem = (props:any):JSX.Element => {
     const { _id, title, picture, lastMessage, onChatClick, active, participants } = props;

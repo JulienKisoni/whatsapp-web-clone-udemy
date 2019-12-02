@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { FilesCollection } from 'meteor/ostrio:files';
 
-export const Images = new FilesCollection({
+export const Images:FilesCollection = new FilesCollection({
     storagePath: "assets/app/whatsapp/uploads/Images",
     downloadRoute: "/files/images",
     permissions: 0o755,

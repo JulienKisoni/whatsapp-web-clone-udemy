@@ -7,10 +7,10 @@ import Actu from './Actu';
 import ActuItem from './ActuItem';
 import Spinner from './Spinner';
 import Avatar from './Avatar';
-import { User } from '../../api/models';
+import { User, Iicon } from '../../api/models';
 import { findOtherUser } from '../../api/helpers';
 
-const icons:any[] = [
+const icons:Iicon[] = [
     { name: "", func: ()=>{}}, 
     { name: "", func: ()=> {}}, 
     {name: "", func: ()=> {}}

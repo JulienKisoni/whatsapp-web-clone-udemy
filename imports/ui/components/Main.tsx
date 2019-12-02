@@ -7,7 +7,7 @@ import StyledMain from '../elements/StyledMain';
 import Right from './Right';
 import Left from './Left';
 
-import { Chat, MessageType } from '../../api/models';
+import { Chat, MessageType, IOverlay, IVisible } from '../../api/models';
 
 import { findChats } from '../../api/helpers';
 import OtherProfile from './OtherProfile';
@@ -17,7 +17,7 @@ import moment from 'moment';
 import Popup from './Popup';
 import ImageViewer from './ImageViewer';
 
-const initialOverlay:any = {
+const initialOverlay:IOverlay = {
     popup: {
         visible: false,
     },
@@ -43,8 +43,8 @@ const Main = (props : any) : JSX.Element => {
         setVisible] = React.useState<boolean>(false);
     const [selectedChat,
         setSelectedChat] = React.useState<Chat>({});
-    const [otherProfile, setOtherProfile] = React.useState<any>({});
-    const [bigOverlay, setBigOverlay] = React.useState<any>(initialOverlay);
+    const [otherProfile, setOtherProfile] = React.useState<IVisible>({});
+    const [bigOverlay, setBigOverlay] = React.useState<IOverlay>(initialOverlay);
 
     // console.log('selected chat before', selectedChat);
     const handleChatClick = (_id : string):void => {

@@ -3,7 +3,6 @@ import FlipMove from 'react-flip-move';
 
 import StyledChatList from '../elements/StyledChatList';
 import ChatItem from './ChatItem';
-import Spinner from './Spinner';
 import {Chat} from '../../api/models';
 
 const ChatList = (props : any) : JSX.Element => {

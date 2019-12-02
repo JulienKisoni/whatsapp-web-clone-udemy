@@ -13,7 +13,7 @@ const LSForm = (props:any):JSX.Element => {
     const toggleEditable = ():void => {
         setEditable(!editable);
     }
-    const handleChange = (e:any) => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const newValue:string = e.target.value;
         if (type === "actu") {
             Meteor.users.update({_id: Meteor.userId()}, {

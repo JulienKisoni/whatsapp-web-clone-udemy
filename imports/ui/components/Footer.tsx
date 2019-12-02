@@ -8,7 +8,7 @@ const Footer = (props:any):JSX.Element => {
 
     const [inputValue, setInputValue] = React.useState<string>("");
     const [iconName, setIconName] = React.useState<string>("microphone");
-    const handleChange = (e):void => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
         setInputValue(e.target.value);
         const name = e.target.value !== "" ? "paper-plane" : "microphone";
         setIconName(name);
